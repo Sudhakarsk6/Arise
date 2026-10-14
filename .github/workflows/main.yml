@@ -1,55 +1,19 @@
-name: Build Android APK
-
+name: Build Arise
 on:
+  push:
   workflow_dispatch:
-    inputs:
-      commit_apk:
-        description: 'Set to true to commit the produced APK into the repository'
-        required: false
-        default: 'false'
-        type: boolean
-
-permissions:
-  contents: write
-
 jobs:
-  build:
+  apk:
     runs-on: ubuntu-latest
-    timeout-minutes: 180
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - name: Build APK
+        id: buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
         with:
-          persist-credentials: true
-
-      - name: Build APK (Buildozer Docker)
-        run: |
-          echo "Starting Buildozer in Docker (this will download SDK/NDK on first run and can take a long time)..."
-          docker run --rm -v "${{ github.workspace }}":/home/user/hostcwd -w /home/user/hostcwd kivy/buildozer:latest /bin/bash -lc "buildozer -v android debug"
-
-      - name: Show produced files
-        run: |
-          echo "List bin/ and apk/"
-          ls -la bin || true
-
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v4
+          command: buildozer android debug
+          buildozer_version: stable
+      - uses: actions/upload-artifact@v4
         with:
           name: arise-apk
-          path: |
-            bin/*.apk
-
-      - name: Commit APK to repository (optional)
-        if: ${{ github.event.inputs.commit_apk == 'true' }}
-        env:
-          GIT_AUTHOR_NAME: github-actions[bot]
-          GIT_AUTHOR_EMAIL: 41898282+github-actions[bot]@users.noreply.github.com
-        run: |
-          echo "Committing APK into repo under apk/"
-          mkdir -p apk
-          cp bin/*.apk apk/ || { echo "No APK found to commit"; exit 0; }
-          git config user.name "$GIT_AUTHOR_NAME"
-          git config user.email "$GIT_AUTHOR_EMAIL"
-          git add apk/*.apk
-          git commit -m "Add built APK (from workflow) [skip ci]" || echo "No changes to commit"
-          git push
+          path: ${{ steps.buildozer.outputs.filename }}
