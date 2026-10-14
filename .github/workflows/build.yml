@@ -18,8 +18,7 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Set up Java 17
-        uses: actions/setup-java@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "17"
@@ -27,7 +26,7 @@ jobs:
       - name: Install system packages
         run: |
           sudo apt-get update
-          sudo apt-get install -y git zip unzip openjdk-17-jdk autoconf automake libtool \
+          sudo apt-get install -y git zip unzip autoconf automake libtool \
             pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake \
             libffi-dev libssl-dev build-essential ccache
 
@@ -35,6 +34,13 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install buildozer "cython==0.29.36" virtualenv setuptools
+
+      - name: Pre-accept Android SDK licenses
+        run: |
+          D="$HOME/.buildozer/android/platform/android-sdk/licenses"
+          mkdir -p "$D"
+          printf "\n24333f8a63b6825ea9c5514f83c2829b004d1fee\n84831b9409646a918e30573bab4c9c91346d8abd\nd56f5187479451eabf01fb78af6dfcb131a6481e\n601085b94cd77f0b54ff86406957099ebe79c4d6\n8933bad161af4178b1185d1a37fbf41ea5269c55\n859f317696f67ef3d7f30a50a5560e7834b43903\n" > "$D/android-sdk-license"
+          printf "\n84831b9409646a918e30573bab4c9c91346d8abd\n" > "$D/android-sdk-preview-license"
 
       - name: Restore Android tools cache
         uses: actions/cache/restore@v4
@@ -48,6 +54,7 @@ jobs:
       - name: Build APK
         run: |
           set -o pipefail
+          java -version
           buildozer -v android debug 2>&1 | tee build.log
 
       - name: Save Android tools cache
@@ -59,11 +66,20 @@ jobs:
             .buildozer
           key: buildozer-v2-${{ runner.os }}-${{ github.run_id }}
 
-      - name: Upload APK
+      - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: arise-apk
           path: bin/*.apk
+
+      - name: Publish APK to GitHub Releases
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "apk-${{ github.run_number }}" bin/*.apk \
+            --title "Arise APK (build ${{ github.run_number }})" \
+            --notes "Debug APK built from commit ${{ github.sha }}"
 
       - name: Publish log summary to build-logs branch
         if: always()
@@ -71,14 +87,15 @@ jobs:
           JOB_STATUS: ${{ job.status }}
         run: |
           mkdir -p /tmp/lg
+          sed 's/\x1b\[[0-9;]*m//g' build.log > /tmp/clean.log || true
           {
             echo "run=${{ github.run_id }} sha=${{ github.sha }} status=$JOB_STATUS"
-            echo "=== ERROR LINES (last 80)"
-            grep -n -iE "error|exception|failed|failure|not found|no such file|cannot find|unable" build.log | tail -80
-            echo "=== GRADLE DETAIL"
-            grep -n -A28 -E "FAILURE: Build failed|What went wrong" build.log | head -90
-            echo "=== LAST 200 LINES"
-            tail -n 200 build.log
+            echo "=== WHAT WENT WRONG (gradle)"
+            grep -n -B3 -A25 "What went wrong" /tmp/clean.log | head -90
+            echo "=== ERROR LINES"
+            grep -n -iE "error|exception|failed|failure|not found|no such file|cannot find|unable|licen" /tmp/clean.log | grep -v -E "Compiling|adding:|copy |warning:" | tail -60
+            echo "=== LAST 60 LINES BEFORE ENV DUMP"
+            grep -v "^#" /tmp/clean.log | tail -n 60
           } > /tmp/lg/build-log.txt 2>&1 || echo "no build.log" > /tmp/lg/build-log.txt
           cd /tmp/lg
           git init -q && git checkout -q -b build-logs
