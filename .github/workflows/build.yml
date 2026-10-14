@@ -51,6 +51,23 @@ jobs:
           key: buildozer-v2-${{ runner.os }}-${{ github.run_id }}
           restore-keys: buildozer-v2-${{ runner.os }}-
 
+      - name: Prepare patched python-for-android (adds Arise services to the manifest)
+        run: |
+          git clone --depth 1 --branch v2024.01.21 https://github.com/kivy/python-for-android.git "$HOME/p4a-src"
+          python - <<'PY'
+          import os
+          p = os.path.expanduser('~/p4a-src/pythonforandroid/bootstraps/sdl2/build/templates/AndroidManifest.tmpl.xml')
+          s = open(p).read()
+          svc = open('extra_application.xml').read()
+          assert s.count('</application>') == 1
+          open(p, 'w').write(s.replace('</application>', svc + '\n    </application>'))
+          print('manifest template patched')
+          PY
+          sed -i '/^p4a.branch/d' buildozer.spec
+          sed -i "s|^android.api = 33|p4a.source_dir = $HOME/p4a-src\nandroid.api = 33|" buildozer.spec
+          grep -n "p4a" buildozer.spec
+          rm -rf .buildozer/android/platform/build-*/dists
+
       - name: Build APK
         run: |
           set -o pipefail

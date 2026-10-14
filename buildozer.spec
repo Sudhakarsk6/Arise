@@ -20,7 +20,6 @@ android.archs = arm64-v8a
 android.accept_sdk_license = True
 android.add_src = java
 android.add_resources = res/xml:xml
-android.extra_manifest_application_arguments = extra_application.xml
 
 [buildozer]
 log_level = 2
