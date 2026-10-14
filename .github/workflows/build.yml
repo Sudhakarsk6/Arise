@@ -36,8 +36,8 @@ jobs:
           path: |
             ~/.buildozer
             .buildozer
-          key: buildozer-${{ runner.os }}-${{ github.run_id }}
-          restore-keys: buildozer-${{ runner.os }}-
+          key: buildozer-v2-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: buildozer-v2-${{ runner.os }}-
 
       - name: Build APK
         run: |
@@ -51,7 +51,7 @@ jobs:
           path: |
             ~/.buildozer
             .buildozer
-          key: buildozer-${{ runner.os }}-${{ github.run_id }}
+          key: buildozer-v2-${{ runner.os }}-${{ github.run_id }}
 
       - name: Upload APK
         uses: actions/upload-artifact@v4

@@ -11,6 +11,8 @@ orientation = portrait
 fullscreen = 0
 
 android.permissions = INTERNET,SEND_SMS,CALL_PHONE,QUERY_ALL_PACKAGES,VIBRATE,ACTIVITY_RECOGNITION,ACCESS_FINE_LOCATION,ACCESS_COARSE_LOCATION
+# pin python-for-android to a stable release (Python 3.11) - master now builds Python 3.14
+p4a.branch = v2024.01.21
 android.api = 33
 android.minapi = 24
 android.ndk = 25b
