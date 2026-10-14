@@ -1,12 +1,16 @@
 name: Build Arise
 on:
   push:
+    branches: [main]
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   apk:
     runs-on: ubuntu-22.04
-    timeout-minutes: 90
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
 
@@ -26,20 +30,50 @@ jobs:
           python -m pip install --upgrade pip
           pip install buildozer "cython==0.29.36" virtualenv setuptools
 
-      - name: Cache Android tools
-        uses: actions/cache@v4
+      - name: Restore Android tools cache
+        uses: actions/cache/restore@v4
         with:
           path: |
             ~/.buildozer
             .buildozer
-          key: buildozer-${{ hashFiles('buildozer.spec') }}
-          restore-keys: buildozer-
+          key: buildozer-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: buildozer-${{ runner.os }}-
 
       - name: Build APK
-        run: buildozer -v android debug
+        run: |
+          set -o pipefail
+          buildozer -v android debug 2>&1 | tee build.log
+
+      - name: Save Android tools cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ~/.buildozer
+            .buildozer
+          key: buildozer-${{ runner.os }}-${{ github.run_id }}
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: arise-apk
           path: bin/*.apk
+
+      - name: Publish log summary to build-logs branch
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          mkdir -p /tmp/lg
+          {
+            echo "run=${{ github.run_id }} sha=${{ github.sha }} status=$JOB_STATUS"
+            echo "=== ERROR LINES (last 80)"
+            grep -n -iE "error|exception|failed|failure|not found|no such file|cannot find|unable" build.log | tail -80
+            echo "=== LAST 200 LINES"
+            tail -n 200 build.log
+          } > /tmp/lg/build-log.txt 2>&1 || echo "no build.log" > /tmp/lg/build-log.txt
+          cd /tmp/lg
+          git init -q && git checkout -q -b build-logs
+          git config user.name github-actions && git config user.email actions@github.com
+          git add -A && git commit -q -m "build log ${{ github.run_id }}"
+          git push -f -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" build-logs
