@@ -8,7 +8,20 @@ permissions:
   contents: write
 
 jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Run automated tests
+        run: |
+          pip install pytest pyaes certifi
+          python -m pytest -q tests
+
   apk:
+    needs: test
     runs-on: ubuntu-22.04
     timeout-minutes: 120
     steps:
@@ -119,3 +132,25 @@ jobs:
           git config user.name github-actions && git config user.email actions@github.com
           git add -A && git commit -q -m "build log ${{ github.run_id }}"
           git push -f -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" build-logs
+
+  exe:
+    needs: test
+    runs-on: windows-latest
+    continue-on-error: true      # best effort: a Windows failure never blocks the APK
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build Windows executable
+        shell: bash
+        run: |
+          pip install "kivy[base]==2.3.0" pyinstaller pyaes certifi plyer pillow
+          pyinstaller --noconfirm --onefile --windowed --name Arise \
+            --add-data "ui.kv;." --add-data "assets;assets" \
+            --collect-all kivy --collect-submodules arise main.py
+      - name: Upload exe
+        uses: actions/upload-artifact@v4
+        with:
+          name: arise-windows-exe
+          path: dist/Arise.exe

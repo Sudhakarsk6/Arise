@@ -4,13 +4,16 @@ package.name = arise
 package.domain = org.arise
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,json
-source.exclude_dirs = .github,bin,.buildozer,java,res
-version = 0.1.0
-requirements = python3,kivy==2.3.0,pyjnius,android,plyer,openssl,certifi
+source.exclude_dirs = .github,bin,.buildozer,java,res,tests,docs
+version = 0.2.0
+requirements = python3,kivy==2.3.0,pyjnius,android,plyer,openssl,certifi,pyaes
 orientation = portrait
+icon.filename = %(source.dir)s/assets/icon.png
+presplash.filename = %(source.dir)s/assets/presplash.png
+android.presplash_color = #FFFFFF
 fullscreen = 0
 
-android.permissions = INTERNET,SEND_SMS,CALL_PHONE,QUERY_ALL_PACKAGES,VIBRATE,ACTIVITY_RECOGNITION,ACCESS_FINE_LOCATION,ACCESS_COARSE_LOCATION
+android.permissions = INTERNET,SEND_SMS,CALL_PHONE,QUERY_ALL_PACKAGES,VIBRATE,ACTIVITY_RECOGNITION,ACCESS_FINE_LOCATION,ACCESS_COARSE_LOCATION,POST_NOTIFICATIONS
 # pin python-for-android to a stable release (Python 3.11) - master now builds Python 3.14
 p4a.branch = v2024.01.21
 android.api = 33

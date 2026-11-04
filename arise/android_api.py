@@ -245,7 +245,8 @@ def request_permissions():
     from android.permissions import request_permissions as rp
     rp(["android.permission.SEND_SMS", "android.permission.CALL_PHONE",
         "android.permission.ACTIVITY_RECOGNITION",
-        "android.permission.ACCESS_FINE_LOCATION", "android.permission.ACCESS_COARSE_LOCATION"])
+        "android.permission.ACCESS_FINE_LOCATION", "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.POST_NOTIFICATIONS"])
 
 
 def _secure(name):

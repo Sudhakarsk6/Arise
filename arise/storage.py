@@ -14,6 +14,10 @@ DEFAULTS = {
               "blocked": ["instagram", "youtube", "facebook", "snapchat", "tiktok", "x", "netflix", "reddit"],
               "blocked_packages": [], "until_ms": 0},
     "workouts": [],
+    "domains": [],            # hosts scripts may call with arise.http_get
+    "currency": "INR",
+    "risk": {"max_position_pct": 20},
+    "logo_path": "",
     "automations": [],       # {"trigger": "voice|time", "value": str, "action": str, "param": str}
     "autoreply": {
         "enabled": False,

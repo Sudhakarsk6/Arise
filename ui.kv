@@ -1,0 +1,1344 @@
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import dp kivy.metrics.dp
+
+<Lbl@Label>:
+    color: .93, .94, .98, 1
+    size_hint_y: None
+    text_size: self.width, None
+    height: self.texture_size[1] + dp(4)
+    halign: 'left'
+    font_size: dp(15)
+
+<Muted@Lbl>:
+    color: .52, .56, .54, 1
+    font_size: dp(13)
+
+<Mono@Lbl>:
+    color: .70, .78, .74, 1
+    font_name: 'RobotoMono-Regular'
+    font_size: dp(11)
+
+<Title@Lbl>:
+    font_size: dp(32)
+    bold: True
+    height: self.texture_size[1] + dp(8)
+
+<Section@Lbl>:
+    font_size: dp(17)
+    bold: True
+
+<Stat@Label>:
+    markup: True
+    halign: 'center'
+    valign: 'middle'
+    color: .93, .94, .98, 1
+
+<Card@BoxLayout>:
+    orientation: 'vertical'
+    padding: dp(16)
+    spacing: dp(10)
+    size_hint_y: None
+    height: self.minimum_height
+    canvas.before:
+        Color:
+            rgba: .062, .068, .066, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(20)]
+        Color:
+            rgba: 1, 1, 1, .06
+        Line:
+            rounded_rectangle: (self.x, self.y, self.width, self.height, dp(20))
+            width: 1
+
+<Btn@Button>:
+    bg: .349, .761, .596, 1
+    size_hint_y: None
+    height: dp(50)
+    background_normal: ''
+    background_down: ''
+    background_color: 0, 0, 0, 0
+    bold: True
+    font_size: dp(15)
+    color: 0, 0, 0, 1
+    canvas.before:
+        Color:
+            rgba: self.bg
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(14)]
+        Color:
+            rgba: (0, 0, 0, .28) if self.state == 'down' else (0, 0, 0, 0)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(14)]
+
+<Ghost@Btn>:
+    bg: .12, .135, .13, 1
+    color: 1, 1, 1, 1
+
+<Danger@Btn>:
+    bg: .75, .22, .30, 1
+    color: 1, 1, 1, 1
+
+<Chip@Button>:
+    background_normal: ''
+    background_down: ''
+    background_color: 0, 0, 0, 0
+    font_size: dp(13)
+    color: .55, .90, .75, 1
+    size_hint_y: None
+    height: dp(36)
+    canvas.before:
+        Color:
+            rgba: .05, .15, .11, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(18)]
+
+<SegBtn@Button>:
+    active: False
+    size_hint_y: None
+    height: dp(38)
+    background_normal: ''
+    background_down: ''
+    background_color: 0, 0, 0, 0
+    color: (0, 0, 0, 1) if self.active else (.75, .80, .78, 1)
+    bold: self.active
+    font_size: dp(13)
+    canvas.before:
+        Color:
+            rgba: (.349, .761, .596, 1) if self.active else (.1, .115, .11, 1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(19)]
+
+<Field@TextInput>:
+    size_hint_y: None
+    height: dp(48)
+    multiline: False
+    write_tab: False
+    background_normal: 'assets/field_bg.png'
+    background_active: 'assets/field_bg_active.png'
+    border: (22, 22, 22, 22)
+    background_color: 1, 1, 1, 1
+    foreground_color: 1, 1, 1, 1
+    hint_text_color: .45, .47, .58, 1
+    cursor_color: .349, .761, .596, 1
+    font_size: dp(15)
+    padding: [dp(14), dp(14)]
+
+<CodeBox@TextInput>:
+    size_hint_y: None
+    height: dp(200)
+    multiline: True
+    write_tab: False
+    font_name: 'RobotoMono-Regular'
+    font_size: dp(12)
+    background_normal: ''
+    background_active: ''
+    background_color: .035, .04, .04, 1
+    foreground_color: .80, .95, .88, 1
+    hint_text_color: .35, .4, .38, 1
+    cursor_color: .349, .761, .596, 1
+    padding: [dp(10), dp(10)]
+
+<Pick@Spinner>:
+    size_hint_y: None
+    height: dp(48)
+    background_normal: ''
+    background_color: 0, 0, 0, 0
+    color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: .086, .098, .094, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(13)]
+
+<Grid@GridLayout>:
+    cols: 1
+    size_hint_y: None
+    height: self.minimum_height
+    padding: max(dp(18), (self.width - dp(560)) / 2), dp(22), max(dp(18), (self.width - dp(560)) / 2), dp(24)
+    spacing: dp(14)
+
+<Rows@GridLayout>:
+    cols: 1
+    size_hint_y: None
+    height: self.minimum_height
+    spacing: dp(8)
+
+<Page@ScrollView>:
+    do_scroll_x: False
+    bar_width: dp(2)
+
+<Seg>:
+    size_hint_y: None
+    height: dp(38)
+    spacing: dp(6)
+
+<NavItem>:
+    orientation: 'vertical'
+    spacing: dp(3)
+    padding: dp(3)
+    Icon:
+        kind: root.kind
+        color: root.tint
+        size_hint_y: None
+        height: dp(24)
+    Label:
+        text: root.text
+        font_size: dp(10)
+        color: root.tint
+        size_hint_y: None
+        height: dp(14)
+
+<ScriptCard>:
+    orientation: 'vertical'
+    size_hint_y: None
+    height: self.minimum_height
+    padding: dp(14)
+    spacing: dp(8)
+    canvas.before:
+        Color:
+            rgba: .062, .068, .066, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(20)]
+        Color:
+            rgba: 1, 1, 1, .06
+        Line:
+            rounded_rectangle: (self.x, self.y, self.width, self.height, dp(20))
+            width: 1
+    BoxLayout:
+        size_hint_y: None
+        height: dp(50)
+        spacing: dp(12)
+        Icon:
+            kind: root.icon
+            color: .349, .761, .596, 1
+            size_hint: None, None
+            size: dp(30), dp(30)
+            pos_hint: {'center_y': .5}
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: root.title
+                bold: True
+                font_size: dp(16)
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+                shorten: True
+            Label:
+                text: root.desc
+                font_size: dp(12)
+                color: .52, .56, .54, 1
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+                shorten: True
+        Btn:
+            text: root.btn_text
+            size_hint_x: None
+            width: dp(84)
+            height: dp(40)
+            pos_hint: {'center_y': .5}
+            on_release: root.run_cb(root) if root.run_cb else None
+    Label:
+        text: root.status_line
+        color: root.status_color
+        font_size: dp(12)
+        size_hint_y: None
+        height: dp(18)
+        text_size: self.width, None
+        halign: 'left'
+        shorten: True
+    Bar:
+        value: root.progress / 100.0
+        size_hint_y: None
+        height: dp(6) if root.progress > 0 else 0
+        opacity: 1 if root.progress > 0 else 0
+    BoxLayout:
+        size_hint_y: None
+        height: dp(34)
+        spacing: dp(8)
+        Chip:
+            text: 'History'
+            on_release: root.hist_cb(root) if root.hist_cb else None
+        Chip:
+            text: 'Open'
+            on_release: root.open_cb(root) if root.open_cb else None
+
+<SplashScreen>:
+    name: 'splash'
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    FloatLayout:
+        SpinnerRing:
+            id: ring
+            size_hint: None, None
+            size: dp(270), dp(270)
+            pos_hint: {'center_x': .5, 'center_y': .5}
+        Image:
+            id: logo
+            source: root.logo_source
+            fit_mode: 'contain'
+            size_hint: None, None
+            size: dp(130), dp(220)
+            pos_hint: {'center_x': .5, 'center_y': .5}
+
+<LockScreen>:
+    name: 'lock'
+    FloatLayout:
+        Backdrop:
+        BoxLayout:
+            orientation: 'vertical'
+            padding: max(dp(32), (self.width - dp(400)) / 2), dp(32)
+            spacing: dp(12)
+            Widget:
+            Label:
+                id: logo
+                text: 'ARISE'
+                font_size: dp(40)
+                bold: True
+                color: .349, .761, .596, 1
+                size_hint_y: None
+                height: dp(64)
+            Muted:
+                id: title
+                halign: 'center'
+            Field:
+                id: pin
+                password: True
+                input_filter: 'int'
+                hint_text: 'PIN'
+                halign: 'center'
+                font_size: dp(22)
+                on_text_validate: app.submit_pin()
+            Label:
+                id: status
+                color: 1, .45, .5, 1
+                size_hint_y: None
+                height: dp(26)
+            Btn:
+                id: go
+                on_release: app.submit_pin()
+            Ghost:
+                id: dev
+                text: 'Use fingerprint / device lock'
+                on_release: app.device_unlock()
+            Widget:
+
+<HomeScreen>:
+    name: 'home'
+    BoxLayout:
+        id: shell
+        orientation: 'vertical'
+        ScreenManager:
+            id: pages
+            transition: FadeTransition(duration=0.12)
+            Screen:
+                name: 'home'
+                Page:
+                    Grid:
+                        BoxLayout:
+                            size_hint_y: None
+                            height: dp(76)
+                            spacing: dp(10)
+                            BoxLayout:
+                                orientation: 'vertical'
+                                Muted:
+                                    id: hello
+                                Title:
+                                    id: hi_name
+                                    text: 'Hi SK'
+                            Smiley:
+                                id: smile
+                                size_hint: None, None
+                                size: dp(64), dp(64)
+                        Card:
+                            Muted:
+                                text: 'THOUGHT OF THE MOMENT'
+                                font_size: dp(11)
+                            Lbl:
+                                id: quote_lbl
+                                italic: True
+                                font_size: dp(18)
+                        BoxLayout:
+                            size_hint_y: None
+                            height: dp(86)
+                            spacing: dp(10)
+                            Card:
+                                size_hint_y: 1
+                                Stat:
+                                    id: hm_steps
+                            Card:
+                                size_hint_y: 1
+                                Stat:
+                                    id: hm_focus
+                            Card:
+                                size_hint_y: 1
+                                Stat:
+                                    id: hm_runs
+                        Section:
+                            text: 'Your automations'
+                        Rows:
+                            id: script_list
+                            spacing: dp(10)
+                        Muted:
+                            id: home_empty
+            Screen:
+                name: 'auto_scripts'
+                Page:
+                    Grid:
+                        Muted:
+                            text: 'WORKSPACE'
+                        Title:
+                            text: 'Automations'
+                        Seg:
+                            group: 'auto'
+                        Card:
+                            Section:
+                                text: 'Import a Python script'
+                            Muted:
+                                text: 'Nothing runs until it is validated, tested and approved by you.'
+                            Field:
+                                id: sc_path
+                                hint_text: 'File path (optional)'
+                            CodeBox:
+                                id: sc_code
+                                hint_text: 'or paste Python code here'
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(50)
+                                spacing: dp(8)
+                                Ghost:
+                                    text: 'Template'
+                                    on_release: app.sc_template()
+                                Ghost:
+                                    text: 'From path'
+                                    on_release: app.sc_import_path()
+                            Btn:
+                                text: 'Validate and import'
+                                on_release: app.sc_import_code()
+                            Mono:
+                                id: sc_report
+                        Card:
+                            Section:
+                                text: 'Your scripts'
+                            Rows:
+                                id: sc_list
+            Screen:
+                name: 'auto_edit'
+                Page:
+                    Grid:
+                        Muted:
+                            text: 'EDIT'
+                        Title:
+                            id: ed_head
+                            text: 'Script'
+                        Ghost:
+                            text: '< Back to scripts'
+                            on_release: app.sub('auto', 'scripts')
+                        Card:
+                            Section:
+                                text: 'Details'
+                            Field:
+                                id: ed_title
+                                hint_text: 'Title'
+                            Field:
+                                id: ed_desc
+                                hint_text: 'Description'
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(48)
+                                spacing: dp(8)
+                                Pick:
+                                    id: ed_cat
+                                Pick:
+                                    id: ed_icon
+                            Field:
+                                id: ed_sched
+                                hint_text: 'Schedule: daily 07:30 or every 30 min'
+                            Btn:
+                                text: 'Save details'
+                                on_release: app.ed_save_meta()
+                        Card:
+                            Section:
+                                text: 'Source code'
+                            CodeBox:
+                                id: ed_code
+                                height: dp(300)
+                            Btn:
+                                text: 'Save as new version and run checks'
+                                on_release: app.ed_new_version()
+                            Mono:
+                                id: ed_report
+                        Card:
+                            Section:
+                                text: 'Review and approval'
+                            Mono:
+                                id: ed_diff
+                            Muted:
+                                id: ed_perm
+                            Btn:
+                                id: ed_approve
+                                text: 'Approve and enable'
+                                on_release: app.ed_approve()
+                            Ghost:
+                                text: 'Disable'
+                                on_release: app.ed_disable()
+                            Muted:
+                                id: ed_msg
+                        Card:
+                            Section:
+                                text: 'Versions'
+                            Rows:
+                                id: ed_versions
+                        Danger:
+                            text: 'Delete script'
+                            on_release: app.ed_delete()
+            Screen:
+                name: 'auto_rules'
+                Page:
+                    Grid:
+                        Muted:
+                            text: 'WORKSPACE'
+                        Title:
+                            text: 'Automations'
+                        Seg:
+                            group: 'auto'
+                        Card:
+                            Section:
+                                text: 'New voice / time rule'
+                            Pick:
+                                id: sp_trig
+                                text: 'Voice phrase'
+                                values: ['Voice phrase', 'Daily time']
+                            Field:
+                                id: in_val
+                                hint_text: 'phrase, or time like 07:30'
+                            Pick:
+                                id: sp_act
+                                text: 'open_app'
+                                values: ['open_app', 'open_url', 'youtube_playlist', 'speak', 'send_sms', 'quiet_mode']
+                            Field:
+                                id: in_param
+                                hint_text: 'app name / URL / text / number|text'
+                            Btn:
+                                text: 'Add rule'
+                                on_release: app.add_auto()
+                        Card:
+                            Section:
+                                text: 'Your rules'
+                            Rows:
+                                id: auto_list
+            Screen:
+                name: 'auto_focus'
+                Page:
+                    Grid:
+                        Muted:
+                            text: 'WORKSPACE'
+                        Title:
+                            text: 'Automations'
+                        Seg:
+                            group: 'auto'
+                        Card:
+                            Lbl:
+                                id: fo_status
+                                font_size: dp(22)
+                                bold: True
+                        Card:
+                            Section:
+                                text: 'Daily schedule'
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(34)
+                                Lbl:
+                                    text: 'Block on schedule'
+                                Toggle:
+                                    id: fo_enabled
+                                    size_hint: None, None
+                                    size: dp(54), dp(30)
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(48)
+                                spacing: dp(8)
+                                Field:
+                                    id: fo_start
+                                    hint_text: 'From 09:00'
+                                Field:
+                                    id: fo_end
+                                    hint_text: 'Until 17:00'
+                            Muted:
+                                text: 'Blocked apps (names or package ids)'
+                            Field:
+                                id: fo_apps
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(34)
+                                Lbl:
+                                    text: 'Strict mode'
+                                Toggle:
+                                    id: fo_strict
+                                    size_hint: None, None
+                                    size: dp(54), dp(30)
+                            Btn:
+                                text: 'Save focus settings'
+                                on_release: app.save_focus()
+                        Card:
+                            Section:
+                                text: 'Quick session'
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(48)
+                                spacing: dp(10)
+                                Field:
+                                    id: fo_mins
+                                    text: '25'
+                                    input_filter: 'int'
+                                Muted:
+                                    text: 'minutes'
+                                    size_hint_x: None
+                                    width: dp(70)
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(50)
+                                spacing: dp(10)
+                                Btn:
+                                    text: 'Start now'
+                                    on_release: app.start_focus()
+                                Danger:
+                                    text: 'Stop'
+                                    on_release: app.stop_focus()
+                        Card:
+                            Section:
+                                text: 'Blocking service'
+                            Muted:
+                                id: fo_access
+                            Ghost:
+                                text: 'Enable blocking (Accessibility)'
+                                on_release: app.open_accessibility()
+            Screen:
+                name: 'auto_reply'
+                Page:
+                    Grid:
+                        Muted:
+                            text: 'WORKSPACE'
+                        Title:
+                            text: 'Automations'
+                        Seg:
+                            group: 'auto'
+                        Card:
+                            Section:
+                                text: 'Auto-reply'
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(34)
+                                Lbl:
+                                    text: 'Enabled'
+                                Toggle:
+                                    id: ar_enabled
+                                    size_hint: None, None
+                                    size: dp(54), dp(30)
+                            Muted:
+                                text: 'Reply if I have not opened the chat within (minutes)'
+                            Field:
+                                id: ar_delay
+                                input_filter: 'int'
+                            Muted:
+                                text: 'Message'
+                            Field:
+                                id: ar_msg
+                            Muted:
+                                text: 'Only these contacts (empty = everyone)'
+                            Field:
+                                id: ar_contacts
+                            Muted:
+                                text: 'One reply per contact every (minutes)'
+                            Field:
+                                id: ar_cool
+                                input_filter: 'int'
+                            Btn:
+                                text: 'Save auto-reply'
+                                on_release: app.save_autoreply()
+                            Muted:
+                                id: ar_access
+                            Ghost:
+                                text: 'Grant notification access'
+                                on_release: app.open_access()
+            Screen:
+                name: 'track_health'
+                Page:
+                    Grid:
+                        Muted:
+                            text: 'TRACKING'
+                        Title:
+                            text: 'Health'
+                        Seg:
+                            group: 'track'
+                        Card:
+                            FloatLayout:
+                                size_hint_y: None
+                                height: dp(230)
+                                Ring:
+                                    id: ring
+                                    size_hint: None, None
+                                    size: dp(210), dp(210)
+                                    pos_hint: {'center_x': .5, 'center_y': .5}
+                                Label:
+                                    id: steps_big
+                                    text: '--'
+                                    font_size: dp(42)
+                                    bold: True
+                                    pos_hint: {'center_x': .5, 'center_y': .56}
+                                    size_hint: None, None
+                                    size: dp(160), dp(60)
+                                Label:
+                                    id: goal_lbl
+                                    text: 'steps'
+                                    color: .52, .58, .55, 1
+                                    pos_hint: {'center_x': .5, 'center_y': .40}
+                                    size_hint: None, None
+                                    size: dp(160), dp(30)
+                            Muted:
+                                id: hl_src
+                                halign: 'center'
+                        BoxLayout:
+                            size_hint_y: None
+                            height: dp(86)
+                            spacing: dp(10)
+                            Card:
+                                size_hint_y: 1
+                                Stat:
+                                    id: st_km
+                            Card:
+                                size_hint_y: 1
+                                Stat:
+                                    id: st_kcal
+                            Card:
+                                size_hint_y: 1
+                                Stat:
+                                    id: st_min
+                        Card:
+                            Section:
+                                text: 'Add a measurement'
+                            Pick:
+                                id: hl_kind
+                                text: 'steps'
+                                values: ['steps', 'sleep', 'heart_rate', 'weight', 'activity', 'water']
+                            Field:
+                                id: hl_val
+                                hint_text: 'Value'
+                                input_filter: 'float'
+                            Btn:
+                                text: 'Add entry'
+                                on_release: app.hl_add()
+                            Muted:
+                                id: hl_msg
+                        Card:
+                            Section:
+                                text: 'Report'
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(48)
+                                spacing: dp(8)
+                                Pick:
+                                    id: hl_rkind
+                                    text: 'steps'
+                                    values: ['steps', 'sleep', 'heart_rate', 'weight', 'activity', 'water']
+                                    on_text: app.refresh_health()
+                                Pick:
+                                    id: hl_period
+                                    text: 'Week'
+                                    values: ['Day', 'Week', 'Month', 'Year']
+                                    on_text: app.refresh_health()
+                            Lbl:
+                                id: hl_summary
+                            Chart:
+                                id: hl_chart
+                                size_hint_y: None
+                                height: dp(170)
+                        Card:
+                            Section:
+                                text: 'GPS workout'
+                            Lbl:
+                                id: wk_lbl
+                                text: 'Not running'
+                            Btn:
+                                id: wk_btn
+                                text: 'Start workout'
+                                on_release: app.toggle_workout()
+                            Muted:
+                                id: wk_hist
+            Screen:
+                name: 'track_habits'
+                Page:
+                    Grid:
+                        Muted:
+                            text: 'TRACKING'
+                        Title:
+                            text: 'Habits'
+                        Seg:
+                            group: 'track'
+                        Card:
+                            Section:
+                                text: 'New habit'
+                            Field:
+                                id: hb_name
+                                hint_text: 'Habit name'
+                            Field:
+                                id: hb_rem
+                                hint_text: 'Reminder HH:MM (optional)'
+                            Btn:
+                                text: 'Add habit'
+                                on_release: app.hb_add()
+                            Muted:
+                                id: hb_msg
+                        Card:
+                            Section:
+                                text: 'Today'
+                            Rows:
+                                id: hb_list
+                        Card:
+                            Section:
+                                text: 'This week'
+                            Chart:
+                                id: hb_chart
+                                unit: '%'
+                                size_hint_y: None
+                                height: dp(150)
+                            Lbl:
+                                id: hb_stats
+            Screen:
+                name: 'track_money'
+                Page:
+                    Grid:
+                        Muted:
+                            text: 'TRACKING'
+                        Title:
+                            text: 'Money'
+                        Seg:
+                            group: 'track'
+                        Card:
+                            Section:
+                                text: 'Add a transaction'
+                            Pick:
+                                id: mn_kind
+                                text: 'expense'
+                                values: ['income', 'expense', 'saving']
+                            Field:
+                                id: mn_amt
+                                hint_text: 'Amount (e.g. 250.50)'
+                                input_filter: 'float'
+                            Field:
+                                id: mn_cat
+                                hint_text: 'Category'
+                            Field:
+                                id: mn_note
+                                hint_text: 'Note (optional)'
+                            Btn:
+                                text: 'Add'
+                                on_release: app.mn_add()
+                            Muted:
+                                id: mn_msg
+                        Card:
+                            Section:
+                                text: 'This month'
+                            Lbl:
+                                id: mn_summary
+                            Chart:
+                                id: mn_chart
+                                size_hint_y: None
+                                height: dp(160)
+                            Muted:
+                                text: 'Net cash flow (income minus expenses), last 6 months'
+                        Card:
+                            Section:
+                                text: 'Budgets'
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(48)
+                                spacing: dp(8)
+                                Field:
+                                    id: bg_cat
+                                    hint_text: 'Category'
+                                Field:
+                                    id: bg_lim
+                                    hint_text: 'Monthly limit'
+                                    input_filter: 'float'
+                            Btn:
+                                text: 'Set budget'
+                                on_release: app.bg_set()
+                            Rows:
+                                id: bg_list
+                        Card:
+                            Section:
+                                text: 'Goals'
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(48)
+                                spacing: dp(8)
+                                Field:
+                                    id: gl_name
+                                    hint_text: 'Goal'
+                                Field:
+                                    id: gl_target
+                                    hint_text: 'Target'
+                                    input_filter: 'float'
+                            Btn:
+                                text: 'Add goal'
+                                on_release: app.gl_add()
+                            Rows:
+                                id: gl_list
+                        Card:
+                            Section:
+                                text: 'Recent and export'
+                            Mono:
+                                id: mn_recent
+                            Ghost:
+                                text: 'Export CSV report'
+                                on_release: app.mn_export()
+                            Muted:
+                                id: mn_export
+            Screen:
+                name: 'fin_watch'
+                Page:
+                    Grid:
+                        Muted:
+                            text: 'MARKETS'
+                        Title:
+                            text: 'Finance'
+                        Seg:
+                            group: 'fin'
+                        Card:
+                            Section:
+                                text: 'Watchlist'
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(48)
+                                spacing: dp(8)
+                                Field:
+                                    id: fw_sym
+                                    hint_text: 'Symbol e.g. TCS.NS, AAPL'
+                                Btn:
+                                    text: 'Add'
+                                    size_hint_x: None
+                                    width: dp(80)
+                                    on_release: app.fw_add()
+                            Ghost:
+                                text: 'Refresh prices'
+                                on_release: app.fw_refresh()
+                            Rows:
+                                id: fw_list
+                            Muted:
+                                id: fw_msg
+                        Card:
+                            Section:
+                                id: fw_sel
+                                text: 'Analysis'
+                            Lbl:
+                                id: fw_info
+                            Chart:
+                                id: fw_chart
+                                kind: 'line'
+                                size_hint_y: None
+                                height: dp(190)
+                        Card:
+                            Section:
+                                text: 'Price alerts'
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(48)
+                                spacing: dp(8)
+                                Field:
+                                    id: al_sym
+                                    hint_text: 'Symbol'
+                                Pick:
+                                    id: al_dir
+                                    text: 'above'
+                                    values: ['above', 'below']
+                                    size_hint_x: None
+                                    width: dp(90)
+                                Field:
+                                    id: al_price
+                                    hint_text: 'Price'
+                                    input_filter: 'float'
+                            Btn:
+                                text: 'Add alert'
+                                on_release: app.al_add()
+                            Rows:
+                                id: al_list
+                        Muted:
+                            text: 'Prices come from Yahoo Finance or Stooq (best effort, may be delayed or unavailable). Each price shows its source and time. Educational use only, not investment advice.'
+            Screen:
+                name: 'fin_test'
+                Page:
+                    Grid:
+                        Muted:
+                            text: 'MARKETS'
+                        Title:
+                            text: 'Backtest'
+                        Seg:
+                            group: 'fin'
+                        Card:
+                            Section:
+                                text: 'SMA crossover strategy'
+                            Field:
+                                id: bt_sym
+                                hint_text: 'Symbol (fetch it in Watchlist first)'
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(48)
+                                spacing: dp(8)
+                                Field:
+                                    id: bt_fast
+                                    text: '20'
+                                    input_filter: 'int'
+                                Field:
+                                    id: bt_slow
+                                    text: '50'
+                                    input_filter: 'int'
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(48)
+                                spacing: dp(8)
+                                Field:
+                                    id: bt_cash
+                                    text: '100000'
+                                    input_filter: 'float'
+                                Field:
+                                    id: bt_fee
+                                    text: '0.1'
+                                    input_filter: 'float'
+                            Muted:
+                                text: 'Fast SMA / slow SMA, then starting cash / fee % per trade'
+                            CodeBox:
+                                id: bt_csv
+                                height: dp(90)
+                                hint_text: 'Optional: paste your own prices as date,close lines'
+                            Btn:
+                                text: 'Run backtest'
+                                on_release: app.bt_run()
+                        Card:
+                            Lbl:
+                                id: bt_result
+                            Chart:
+                                id: bt_chart
+                                kind: 'line'
+                                size_hint_y: None
+                                height: dp(190)
+                            Muted:
+                                text: 'Green: strategy, grey: buy and hold. Past performance does not predict future results.'
+            Screen:
+                name: 'fin_paper'
+                Page:
+                    Grid:
+                        Muted:
+                            text: 'MARKETS'
+                        Title:
+                            text: 'Paper trading'
+                        Seg:
+                            group: 'fin'
+                        Card:
+                            Lbl:
+                                id: pp_state
+                            Muted:
+                                text: 'Simulation only. Live trading is disabled and no broker is connected.'
+                        Card:
+                            Section:
+                                text: 'Order at the latest fetched close'
+                            Field:
+                                id: pp_sym
+                                hint_text: 'Symbol'
+                            Field:
+                                id: pp_qty
+                                hint_text: 'Quantity'
+                                input_filter: 'float'
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(50)
+                                spacing: dp(10)
+                                Btn:
+                                    text: 'Buy'
+                                    on_release: app.pp_order('BUY')
+                                Danger:
+                                    text: 'Sell'
+                                    on_release: app.pp_order('SELL')
+                            Muted:
+                                id: pp_msg
+                        Card:
+                            Section:
+                                text: 'Trades'
+                            Mono:
+                                id: pp_trades
+                            Ghost:
+                                text: 'Reset paper account'
+                                on_release: app.pp_reset()
+            Screen:
+                name: 'ai'
+                Page:
+                    Grid:
+                        Muted:
+                            text: 'ASSISTANT'
+                        Title:
+                            text: 'AI Assistant'
+                        AnchorLayout:
+                            size_hint_y: None
+                            height: dp(180)
+                            MicButton:
+                                id: mic
+                                size_hint: None, None
+                                size: dp(180), dp(180)
+                                on_release: app.listen()
+                        Muted:
+                            text: 'Tap to speak, or type below'
+                            halign: 'center'
+                        BoxLayout:
+                            size_hint_y: None
+                            height: dp(36)
+                            spacing: dp(6)
+                            Chip:
+                                text: 'Explain'
+                                on_release: app.ai_action('explain')
+                            Chip:
+                                text: 'Generate'
+                                on_release: app.ai_action('generate')
+                            Chip:
+                                text: 'Modify'
+                                on_release: app.ai_action('modify')
+                            Chip:
+                                text: 'Bugs'
+                                on_release: app.ai_action('bugs')
+                        BoxLayout:
+                            size_hint_y: None
+                            height: dp(36)
+                            spacing: dp(6)
+                            Chip:
+                                text: 'Tests'
+                                on_release: app.ai_action('tests')
+                            Chip:
+                                text: 'My data'
+                                on_release: app.ai_action('summary')
+                            Chip:
+                                text: 'Finance'
+                                on_release: app.ai_action('finance')
+                            Chip:
+                                text: 'My playlist'
+                                on_release: app.process('play my playlist')
+                        Card:
+                            Muted:
+                                id: ai_heard
+                                text: 'Say a command, ask a question, or pick a tool above'
+                            Lbl:
+                                id: ai_answer
+                                font_size: dp(15)
+                                color: .55, .95, .76, 1
+                            Btn:
+                                id: ai_code_btn
+                                text: 'Send code to the Automations editor'
+                                opacity: 0
+                                disabled: True
+                                height: 0
+                                on_release: app.ai_send_code()
+                        BoxLayout:
+                            size_hint_y: None
+                            height: dp(48)
+                            spacing: dp(8)
+                            Field:
+                                id: ai_typed
+                                hint_text: 'Type a request or question'
+                                on_text_validate: app.process(self.text)
+                            Btn:
+                                text: 'Send'
+                                size_hint_x: None
+                                width: dp(84)
+                                on_release: app.process(ai_typed.text)
+                        Muted:
+                            text: 'AI-written code is never run automatically. It must pass the checks in Automations and be approved by you. The AI cannot know a script works until the app has tested it.'
+            Screen:
+                name: 'settings'
+                Page:
+                    Grid:
+                        Muted:
+                            text: 'MAKE IT YOURS'
+                        Title:
+                            text: 'Settings'
+                        Card:
+                            Section:
+                                text: 'Profile'
+                            Muted:
+                                text: 'Your name'
+                            Field:
+                                id: st_name
+                            Muted:
+                                text: 'Height cm / Weight kg / Daily step goal'
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(48)
+                                spacing: dp(8)
+                                Field:
+                                    id: st_h
+                                    input_filter: 'int'
+                                Field:
+                                    id: st_w
+                                    input_filter: 'int'
+                                Field:
+                                    id: st_goal
+                                    input_filter: 'int'
+                            Muted:
+                                text: 'Currency code'
+                            Field:
+                                id: st_cur
+                        Card:
+                            Section:
+                                text: 'AI, voice and network'
+                            Muted:
+                                id: st_keynote
+                                text: 'AI API key (encrypted with your PIN)'
+                            Field:
+                                id: st_key
+                                password: True
+                            Muted:
+                                text: 'AI model'
+                            Field:
+                                id: st_model
+                            Muted:
+                                text: 'YouTube playlist (link or ID)'
+                            Field:
+                                id: st_playlist
+                            Muted:
+                                text: 'Contacts (name=number, comma separated)'
+                            Field:
+                                id: st_contacts
+                            Muted:
+                                text: 'Domains scripts may call (comma separated, https only)'
+                            Field:
+                                id: st_domains
+                        Card:
+                            Section:
+                                text: 'Security'
+                            Muted:
+                                text: 'Auto-lock after (seconds, min 15)'
+                            Field:
+                                id: st_lock
+                                input_filter: 'int'
+                            Muted:
+                                text: 'New PIN (empty keeps current)'
+                            Field:
+                                id: st_pin
+                                password: True
+                                input_filter: 'int'
+                        Card:
+                            Section:
+                                text: 'Logo'
+                            Muted:
+                                text: 'Path to a PNG/JPG to replace the splash logo'
+                            Field:
+                                id: st_logo
+                            Ghost:
+                                text: 'Apply logo'
+                                on_release: app.apply_logo()
+                        Btn:
+                            text: 'Save settings'
+                            on_release: app.save_settings()
+                        Danger:
+                            text: 'Lock now'
+                            on_release: app.show_lock()
+                        Card:
+                            Section:
+                                text: 'Backup and recovery'
+                            Muted:
+                                text: 'Backup passphrase (not stored anywhere)'
+                            Field:
+                                id: bk_pass
+                                password: True
+                            Ghost:
+                                text: 'Back up now (encrypted)'
+                                on_release: app.backup_now()
+                            Field:
+                                id: bk_path
+                                hint_text: 'Backup file path to restore'
+                            Ghost:
+                                text: 'Restore on next start'
+                                on_release: app.restore_backup()
+                            Muted:
+                                id: bk_msg
+                        Card:
+                            Section:
+                                text: 'Audit log'
+                            Mono:
+                                id: audit_label
+                            Ghost:
+                                text: 'Refresh logs'
+                                on_release: app.refresh_logs()
+                        Card:
+                            Section:
+                                text: 'Activity log'
+                            Mono:
+                                id: log_label
+        BoxLayout:
+            id: nav
+            size_hint_y: None
+            height: dp(66)
+            padding: dp(4), dp(4)
+            canvas.before:
+                Color:
+                    rgba: .015, .015, .015, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                Color:
+                    rgba: 1, 1, 1, .07
+                Line:
+                    points: [self.right, self.y, self.right, self.top] if self.orientation == 'vertical' else [self.x, self.top, self.right, self.top]
+            NavItem:
+                id: nav_home
+                kind: 'home'
+                text: 'Home'
+                selected: True
+                on_release: app.goto('home')
+            NavItem:
+                id: nav_auto
+                kind: 'auto'
+                text: 'Automations'
+                on_release: app.goto('auto')
+            NavItem:
+                id: nav_track
+                kind: 'fitness'
+                text: 'Tracking'
+                on_release: app.goto('track')
+            NavItem:
+                id: nav_fin
+                kind: 'chart'
+                text: 'Finance'
+                on_release: app.goto('fin')
+            NavItem:
+                id: nav_ai
+                kind: 'star'
+                text: 'Assistant'
+                on_release: app.goto('ai')
+            NavItem:
+                id: nav_settings
+                kind: 'settings'
+                text: 'Settings'
+                on_release: app.goto('settings')
+
+ScreenManager:
+    transition: FadeTransition(duration=0.3)
+    SplashScreen:
+    LockScreen:
+    HomeScreen:

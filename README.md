@@ -1,22 +1,15 @@
-# Arise v0.1
-Android automation app (Kivy + Python + a small Java notification listener).
+# Arise v0.2 (MyLife AI)
 
-## Build the APK (no installs needed)
-1. Create a free GitHub repo and upload ALL files in this folder (keep the .github folder).
-2. Open the repo > Actions tab > "Build Arise APK" (it runs on every push; first build ~20-30 min).
-3. When it finishes, open the run and download the `arise-apk` artifact (zip) > unzip > install the .apk.
+Personal automation, tracking, finance and AI assistant. One Python/Kivy code base for Android (APK) and Windows/macOS/Linux.
 
-## First run on the phone
-1. Create a PIN. 2. Settings tab: paste your YouTube playlist link. 3. Auto-reply tab: Grant notification access
-(Android may need "Allow restricted settings" in App info > menu). 4. Allow SMS permission when asked.
+* Splash with your logo (assets/logo.png) -> PIN -> Home with automation cards
+* Automation Workspace: import / validate / test / diff / approve / roll back Python scripts (sandboxed)
+* Health, Habits, Money trackers - no invented data, missing values shown as unavailable
+* Finance: watchlist, indicators, backtest, paper trading (live trading is NOT implemented)
+* AI assistant (your own key, encrypted with your PIN), voice commands, Focus mode, auto-reply
+* Encrypted backups, audit log, rate limiting, auto-lock
 
-## Windows .exe
-The same repo builds `Arise.exe` (Actions > arise-windows-exe). Voice input, steps, GPS, calls and focus
-blocking are phone-only; on PC you can type commands and get spoken answers + AI chat.
+Docs: [docs/INSTALL.md](docs/INSTALL.md) | [docs/DEPLOY.md](docs/DEPLOY.md) | [docs/FEATURES.md](docs/FEATURES.md)
 
-## AI key
-Never put your key in the code. Paste it in the app: Settings > AI API key.
-
-## Design
-Theme: black + #59c298. One codebase: phones get a bottom navigation bar, wide windows (Windows .exe,
-tablets) get a left side rail with centered content (switches at 760 dp width).
+Build: push to `main` -> GitHub Actions runs tests, builds the APK and publishes it under **Releases**.
+Tests: `pip install pytest pyaes certifi && python -m pytest -q tests`
