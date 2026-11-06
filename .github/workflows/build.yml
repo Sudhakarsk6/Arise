@@ -48,21 +48,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install "buildozer==1.5.0" "cython==0.29.36" virtualenv setuptools
 
-      - name: Pre-accept Android SDK licenses
-        run: |
-          D="$HOME/.buildozer/android/platform/android-sdk/licenses"
-          mkdir -p "$D"
-          printf "\n24333f8a63b6825ea9c5514f83c2829b004d1fee\n84831b9409646a918e30573bab4c9c91346d8abd\nd56f5187479451eabf01fb78af6dfcb131a6481e\n601085b94cd77f0b54ff86406957099ebe79c4d6\n8933bad161af4178b1185d1a37fbf41ea5269c55\n859f317696f67ef3d7f30a50a5560e7834b43903\n" > "$D/android-sdk-license"
-          printf "\n84831b9409646a918e30573bab4c9c91346d8abd\n" > "$D/android-sdk-preview-license"
-
       - name: Restore Android tools cache
         uses: actions/cache/restore@v4
         with:
           path: |
             ~/.buildozer
             .buildozer
-          key: buildozer-v2-${{ runner.os }}-${{ github.run_id }}
-          restore-keys: buildozer-v2-${{ runner.os }}-
+          key: buildozer-v3-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: buildozer-v3-${{ runner.os }}-
 
       - name: Prepare patched python-for-android (adds Arise services to the manifest)
         run: |
@@ -95,14 +88,21 @@ jobs:
           tail -n 25 build.log
           exit $code
 
-      - name: Save Android tools cache
+      - name: Check Android SDK before caching
+        id: sdk
         if: always()
+        run: |
+          D="$HOME/.buildozer/android/platform/android-sdk"
+          if [ -x "$D/tools/bin/sdkmanager" ] || [ -x "$D/cmdline-tools/latest/bin/sdkmanager" ]; then echo "ok=true" >> "$GITHUB_OUTPUT"; else echo "ok=false" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Save Android tools cache
+        if: always() && steps.sdk.outputs.ok == 'true'
         uses: actions/cache/save@v4
         with:
           path: |
             ~/.buildozer
             .buildozer
-          key: buildozer-v2-${{ runner.os }}-${{ github.run_id }}
+          key: buildozer-v3-${{ runner.os }}-${{ github.run_id }}
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
