@@ -85,6 +85,10 @@ jobs:
         run: |
           set +e
           { java -version 2>&1 | head -2; echo "--- buildozer.spec (effective)"; grep -vE '^\s*(#|$)' buildozer.spec; echo "--- build start"; } > build.log
+          export PYTHONUNBUFFERED=1
+          python -m pip --version >> build.log 2>&1
+          python -m pip install -q --user appdirs "colorama>=0.3.3" jinja2 "sh>=1.10, <2.0; sys_platform!='win32'" build toml packaging setuptools >> build.log 2>&1
+          echo "pre-install exit code: $?" >> build.log
           buildozer -v android debug >> build.log 2>&1
           code=$?
           echo "buildozer exit code: $code" >> build.log
