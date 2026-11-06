@@ -1,0 +1,81 @@
+exit=1
+471 DEBUG: collect_submodules - scanning (sub)package kivy.network
+[[1;36mDEBUG[0m  ] collect_submodules - scanning (sub)package kivy.network
+471 DEBUG: collect_submodules - scanning (sub)package kivy.network in location(s): ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\network']
+[[1;36mDEBUG[0m  ] [collect_submodules - scanning (sub)package kivy.network in location(s)] ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\network']
+473 DEBUG: collect_submodules - scanning (sub)package kivy.modules
+[[1;36mDEBUG[0m  ] collect_submodules - scanning (sub)package kivy.modules
+473 DEBUG: collect_submodules - scanning (sub)package kivy.modules in location(s): ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\modules']
+[[1;36mDEBUG[0m  ] [collect_submodules - scanning (sub)package kivy.modules in location(s)] ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\modules']
+473 DEBUG: collect_submodules - scanning (sub)package kivy.lib
+[[1;36mDEBUG[0m  ] collect_submodules - scanning (sub)package kivy.lib
+473 DEBUG: collect_submodules - scanning (sub)package kivy.lib in location(s): ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\lib']
+[[1;36mDEBUG[0m  ] [collect_submodules - scanning (sub)package kivy.lib in location(s)] ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\lib']
+475 DEBUG: collect_submodules - scanning (sub)package kivy.lib.vidcore_lite
+[[1;36mDEBUG[0m  ] collect_submodules - scanning (sub)package kivy.lib.vidcore_lite
+475 DEBUG: collect_submodules - scanning (sub)package kivy.lib.vidcore_lite in location(s): ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\lib\\vidcore_lite']
+[[1;36mDEBUG[0m  ] [collect_submodules - scanning (sub)package kivy.lib.vidcore_lite in location(s)] ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\lib\\vidcore_lite']
+476 DEBUG: collect_submodules - scanning (sub)package kivy.lib.gstplayer
+[[1;36mDEBUG[0m  ] collect_submodules - scanning (sub)package kivy.lib.gstplayer
+478 DEBUG: collect_submodules - scanning (sub)package kivy.lang
+[[1;36mDEBUG[0m  ] collect_submodules - scanning (sub)package kivy.lang
+478 DEBUG: collect_submodules - scanning (sub)package kivy.lang in location(s): ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\lang']
+[[1;36mDEBUG[0m  ] [collect_submodules - scanning (sub)package kivy.lang in location(s)] ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\lang']
+478 DEBUG: collect_submodules - scanning (sub)package kivy.input
+[[1;36mDEBUG[0m  ] collect_submodules - scanning (sub)package kivy.input
+487 DEBUG: collect_submodules - scanning (sub)package kivy.input in location(s): ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\input']
+[[1;36mDEBUG[0m  ] [collect_submodules - scanning (sub)package kivy.input in location(s)] ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\input']
+487 DEBUG: collect_submodules - scanning (sub)package kivy.input.providers
+[[1;36mDEBUG[0m  ] collect_submodules - scanning (sub)package kivy.input.providers
+487 DEBUG: collect_submodules - scanning (sub)package kivy.input.providers in location(s): ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\input\\providers']
+[[1;36mDEBUG[0m  ] [collect_submodules - scanning (sub)package kivy.input.providers in location(s)] ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\input\\providers']
+489 DEBUG: collect_submodules - scanning (sub)package kivy.input.postproc
+[[1;36mDEBUG[0m  ] collect_submodules - scanning (sub)package kivy.input.postproc
+489 DEBUG: collect_submodules - scanning (sub)package kivy.input.postproc in location(s): ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\input\\postproc']
+[[1;36mDEBUG[0m  ] [collect_submodules - scanning (sub)package kivy.input.postproc in location(s)] ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\input\\postproc']
+489 DEBUG: collect_submodules - scanning (sub)package kivy.graphics
+[[1;36mDEBUG[0m  ] collect_submodules - scanning (sub)package kivy.graphics
+489 DEBUG: collect_submodules - scanning (sub)package kivy.graphics in location(s): ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\graphics']
+[[1;36mDEBUG[0m  ] [collect_submodules - scanning (sub)package kivy.graphics in location(s)] ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\graphics']
+491 DEBUG: collect_submodules - scanning (sub)package kivy.graphics.cgl_backend
+[[1;36mDEBUG[0m  ] collect_submodules - scanning (sub)package kivy.graphics.cgl_backend
+491 DEBUG: collect_submodules - scanning (sub)package kivy.graphics.cgl_backend in location(s): ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\graphics\\cgl_backend']
+[[1;36mDEBUG[0m  ] [collect_submodules - scanning (sub)package kivy.graphics.cgl_backend in location(s)] ['C:\\hostedtoolcache\\windows\\Python\\3.11.9\\x64\\Lib\\site-packages\\kivy\\graphics\\cgl_backend']
+491 DEBUG: collect_submodules - scanning (sub)package kivy.garden
+[[1;36mDEBUG[0m  ] collect_submodules - scanning (sub)package kivy.garden
+493 DEBUG: collect_submodules - scanning (sub)package kivy.garden in location(s): kivy.garden
+[[1;36mDEBUG[0m  ] [collect_submodules - scanning (sub)package kivy.garden in location(s)] kivy.garden
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\hostedtoolcache\windows\Python\3.11.9\x64\Scripts\pyinstaller.exe\__main__.py", line 5, in <module>
+  File "C:\hostedtoolcache\windows\Python\3.11.9\x64\Lib\site-packages\PyInstaller\__main__.py", line 231, in _console_script_run
+    run()
+  File "C:\hostedtoolcache\windows\Python\3.11.9\x64\Lib\site-packages\PyInstaller\__main__.py", line 215, in run
+    run_build(pyi_config, spec_file, **vars(args))
+  File "C:\hostedtoolcache\windows\Python\3.11.9\x64\Lib\site-packages\PyInstaller\__main__.py", line 70, in run_build
+    PyInstaller.building.build_main.main(pyi_config, spec_file, **kwargs)
+  File "C:\hostedtoolcache\windows\Python\3.11.9\x64\Lib\site-packages\PyInstaller\building\build_main.py", line 1275, in main
+    build(specfile, distpath, workpath, clean_build)
+  File "C:\hostedtoolcache\windows\Python\3.11.9\x64\Lib\site-packages\PyInstaller\building\build_main.py", line 1213, in build
+    exec(code, spec_namespace)
+  File "D:\a\Arise\Arise\Arise.spec", line 9, in <module>
+    tmp_ret = collect_all('kivy')
+              ^^^^^^^^^^^^^^^^^^^
+  File "C:\hostedtoolcache\windows\Python\3.11.9\x64\Lib\site-packages\PyInstaller\utils\hooks\__init__.py", line 1150, in collect_all
+    hiddenimports = collect_submodules(package_name, on_error=on_error, filter=filter_submodules)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\hostedtoolcache\windows\Python\3.11.9\x64\Lib\site-packages\PyInstaller\utils\hooks\__init__.py", line 634, in collect_submodules
+    modules, subpackages, on_error = isolated_python.call(_collect_submodules, name, on_error)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\hostedtoolcache\windows\Python\3.11.9\x64\Lib\site-packages\PyInstaller\isolated\_parent.py", line 334, in call
+    raise RuntimeError(f"Child process call to {function.__name__}() failed with:\n" + output)
+RuntimeError: Child process call to _collect_submodules() failed with:
+  File "C:\hostedtoolcache\windows\Python\3.11.9\x64\Lib\site-packages\PyInstaller\isolated\_child.py", line 63, in run_next_command
+    output = function(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\hostedtoolcache\windows\Python\3.11.9\x64\Lib\site-packages\PyInstaller\utils\hooks\__init__.py", line 692, in _collect_submodules
+    for importer, name, ispkg in pkgutil.iter_modules(paths, name + '.'):
+  File "C:\hostedtoolcache\windows\Python\3.11.9\x64\Lib\pkgutil.py", line 123, in iter_modules
+    raise ValueError("path must be None or list of paths to look for "
+ValueError: path must be None or list of paths to look for modules in
