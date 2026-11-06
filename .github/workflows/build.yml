@@ -135,8 +135,8 @@ jobs:
             grep -n -B3 -A25 "What went wrong" /tmp/clean.log | head -90
             echo "=== ERROR LINES"
             grep -n -iE "error|exception|failed|failure|not found|no such file|cannot find|unable|licen|invalid" /tmp/clean.log | grep -v -E "Compiling|adding:|copy |warning:" | tail -60
-            echo "=== LAST 70 LINES"
-            grep -v "^#" /tmp/clean.log | tail -n 70
+            echo "=== LAST 90 LINES (unfiltered)"
+            tail -n 90 /tmp/clean.log
           } > /tmp/lg/build-log.txt 2>&1 || echo "log summary failed" > /tmp/lg/build-log.txt
           cd /tmp/lg
           git init -q && git checkout -q -b build-logs
@@ -158,7 +158,7 @@ jobs:
         run: |
           set +e
           {
-            pip install "kivy[base]==2.3.0" pyinstaller pyaes certifi plyer pillow
+            pip install "kivy[base]==2.3.0" "pyinstaller==6.6.0" "pyinstaller-hooks-contrib==2024.5" pyaes certifi plyer pillow
             pyinstaller --noconfirm --onefile --windowed --name Arise --add-data "ui.kv;." --add-data "assets;assets" --hidden-import arise.adapters.android --hidden-import arise.adapters.desktop --hidden-import arise.adapters.ios --hidden-import plyer.platforms.win.notification --hidden-import plyer.platforms.win.tts main.py
           } > exe.log 2>&1
           code=$?
