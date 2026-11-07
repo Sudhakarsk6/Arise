@@ -1,0 +1,185 @@
+run=42316655341 sha=f78dacd704cb3e62978e54ee3616be9b6be72f24 status=success lines=5555
+=== FIRST 45 LINES
+openjdk version "17.0.21" 2026-10-20
+OpenJDK Runtime Environment Temurin-17.0.21+9 (build 17.0.21+9)
+--- buildozer.spec (effective)
+[app]
+title = Arise
+package.name = arise
+package.domain = org.arise
+source.dir = .
+source.include_exts = py,png,jpg,kv,atlas,json
+source.exclude_dirs = .github,bin,.buildozer,java,res,tests,docs,hooks
+version = 0.2.0
+requirements = python3,kivy==2.3.0,pyjnius,android,plyer,openssl,certifi,pyaes
+orientation = portrait
+icon.filename = %(source.dir)s/assets/icon.png
+presplash.filename = %(source.dir)s/assets/presplash.png
+android.presplash_color = #FFFFFF
+fullscreen = 0
+android.permissions = INTERNET,SEND_SMS,CALL_PHONE,QUERY_ALL_PACKAGES,VIBRATE,ACTIVITY_RECOGNITION,ACCESS_FINE_LOCATION,ACCESS_COARSE_LOCATION,POST_NOTIFICATIONS
+p4a.source_dir = /home/runner/p4a-src
+android.api = 33
+android.minapi = 24
+android.ndk = 25b
+android.archs = arm64-v8a
+android.accept_sdk_license = True
+android.add_src = java
+android.add_resources = res/xml:xml
+[buildozer]
+log_level = 2
+warn_on_root = 1
+--- build start
+pip 26.3 from /opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/pip (python 3.10)
+pre-install exit code: 0
+# Check configuration tokens
+# Ensure build layout
+# Create directory /home/runner/work/Arise/Arise/bin
+# Check configuration tokens
+# Preparing build
+# Check requirements for android
+# Search for Git (git)
+#  -> found at /usr/bin/git
+# Search for Cython (cython)
+#  -> found at /opt/hostedtoolcache/Python/3.10.22/x64/bin/cython
+# Search for Java compiler (javac)
+#  -> found at /usr/lib/jvm/temurin-17-jdk-amd64/bin/javac
+# Search for Java keytool (keytool)
+=== WHAT WENT WRONG (gradle)
+=== ERROR LINES
+24:android.accept_sdk_license = True
+207:[INFO]:    The requirements (certifi, chardet, idna, plyer, pyaes, requests, urllib3) were not found as recipes, they will be installed with pip.
+1229:SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?
+1235:SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?
+1241:SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?
+1247:SyntaxError: Missing parentheses in call to 'print'. Did you mean print(...)?
+1265:SyntaxError: leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers
+1424:SyntaxError: unknown encoding: uft-8
+1428:SyntaxError: encoding problem: utf8 with BOM
+1434:SyntaxError: invalid character '€' (U+20AC)
+1440:SyntaxError: from __future__ imports must occur at the beginning of the file
+1446:SyntaxError: future feature rested_snopes is not defined
+1452:SyntaxError: from __future__ imports must occur at the beginning of the file
+1458:SyntaxError: from __future__ imports must occur at the beginning of the file
+1464:SyntaxError: from __future__ imports must occur at the beginning of the file
+1470:SyntaxError: from __future__ imports must occur at the beginning of the file
+1476:SyntaxError: future feature * is not defined
+1482:SyntaxError: not a chance
+1488:SyntaxError: (unicode error) 'utf-8' codec can't decode byte 0xf6 in position 1: invalid start byte
+2236:Listing '/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/build/other_builds/python3/arm64-v8a__ndk_target_24/python3/Lib/test/test_tomllib/data/invalid'...
+2237:Listing '/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/build/other_builds/python3/arm64-v8a__ndk_target_24/python3/Lib/test/test_tomllib/data/invalid/array'...
+2238:Listing '/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/build/other_builds/python3/arm64-v8a__ndk_target_24/python3/Lib/test/test_tomllib/data/invalid/array-of-tables'...
+2239:Listing '/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/build/other_builds/python3/arm64-v8a__ndk_target_24/python3/Lib/test/test_tomllib/data/invalid/boolean'...
+2240:Listing '/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/build/other_builds/python3/arm64-v8a__ndk_target_24/python3/Lib/test/test_tomllib/data/invalid/dates-and-times'...
+2241:Listing '/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/build/other_builds/python3/arm64-v8a__ndk_target_24/python3/Lib/test/test_tomllib/data/invalid/dotted-keys'...
+2242:Listing '/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/build/other_builds/python3/arm64-v8a__ndk_target_24/python3/Lib/test/test_tomllib/data/invalid/inline-table'...
+2243:Listing '/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/build/other_builds/python3/arm64-v8a__ndk_target_24/python3/Lib/test/test_tomllib/data/invalid/keys-and-vals'...
+2244:Listing '/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/build/other_builds/python3/arm64-v8a__ndk_target_24/python3/Lib/test/test_tomllib/data/invalid/literal-str'...
+2245:Listing '/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/build/other_builds/python3/arm64-v8a__ndk_target_24/python3/Lib/test/test_tomllib/data/invalid/multiline-basic-str'...
+2246:Listing '/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/build/other_builds/python3/arm64-v8a__ndk_target_24/python3/Lib/test/test_tomllib/data/invalid/multiline-literal-str'...
+2247:Listing '/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/build/other_builds/python3/arm64-v8a__ndk_target_24/python3/Lib/test/test_tomllib/data/invalid/table'...
+2580:Listing '/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/build/python-installs/arise/arm64-v8a/certifi-2026.10.23.dist-info/licenses'...
+2616:Listing '/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/build/python-installs/arise/arm64-v8a/chardet-7.7.0.dist-info/licenses'...
+2630:Listing '/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/build/python-installs/arise/arm64-v8a/idna-3.20.dist-info/licenses'...
+3205:Listing '/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/build/python-installs/arise/arm64-v8a/pyaes-1.6.1.dist-info/licenses'...
+3228:Listing '/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/build/python-installs/arise/arm64-v8a/requests-2.34.2.dist-info/licenses'...
+3401:Listing '/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/build/python-installs/arise/arm64-v8a/urllib3-2.8.0.dist-info/licenses'...
+3475:[DEBUG]:   -> running zip -X /home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/dists/arise/_python_bundle__arm64-v8a/_python_bundle/stdlib.zip ./hashlib.pyc ./shutil.pyc ./xdrlib.pyc ./_pydecimal.pyc ./genericpath.pyc ./mailbox.pyc ./imghdr.pyc ./sched.pyc ./weakref.pyc ./colorsys.pyc ./filecmp.pyc ./cgi.pyc ./bdb.pyc ./pickletools.pyc ./sysconfig.pyc ./graphlib.pyc ./pstats.pyc ./codecs.pyc ./poplib.pyc ./statistics.pyc ./pdb.pyc ./profile.pyc ./ast.pyc ./zipfile.pyc ./_sitebuiltins.pyc ./abc.pyc ./pathlib.pyc ./pkgutil.pyc ./fractions.pyc ./heapq.pyc ./pyclbr.pyc ./turtle.pyc ./csv.pyc ./stat.pyc ./subprocess.pyc ./asynchat.pyc ./this.pyc ./compileall.pyc ./queue.pyc ./doctest.pyc ./mimetypes.pyc ./runpy.pyc ./getopt.pyc ./nntplib.pyc ./opcode.pyc ./_compat_pickle.pyc ./warnings.pyc ./numbers.pyc ./reprlib.pyc ./contextlib.pyc ./enum.pyc ./sre_parse.pyc ./string.pyc ./imaplib.pyc ./tracemalloc.pyc ./tokenize.pyc ./token.pyc ./rlcompleter.pyc ./antigravity.pyc ./py_compile.pyc ./fileinput.pyc ./gettext.pyc ./tarfile.pyc ./uuid.pyc ./pprint.pyc ./socketserver.pyc ./secrets.pyc ./_py_abc.pyc ./shlex.pyc ./dataclasses.pyc ./stringprep.pyc ./contextvars.pyc ./random.pyc ./_aix_support.pyc ./keyword.pyc ./sndhdr.pyc ./ipaddress.pyc ./typing.pyc ./traceback.pyc ./_pyio.pyc ./dis.pyc ./getpass.pyc ./hmac.pyc ./_collections_abc.pyc ./struct.pyc ./cmd.pyc ./plistlib.pyc ./zipapp.pyc ./tty.pyc ./wave.pyc ./linecache.pyc ./tabnanny.pyc ./configparser.pyc ./ntpath.pyc ./site.py.orig ./posixpath.pyc ./telnetlib.pyc ./netrc.pyc ./symtable.pyc ./pickle.pyc ./site.pyc ./datetime.pyc ./functools.pyc ./modulefinder.pyc ./nturl2path.pyc ./_markupbase.pyc ./signal.pyc ./bisect.pyc ./sunau.pyc ./_osx_support.pyc ./textwrap.pyc ./crypt.pyc ./socket.pyc ./__hello__.pyc ./base64.pyc ./ftplib.pyc ./timeit.pyc ./trace.pyc ./shelve.pyc ./_bootsubprocess.pyc ./cProfile.pyc ./quopri.pyc ./tempfile.pyc ./sre_constants.pyc ./threading.pyc ./webbrowser.pyc ./os.pyc ./copy.pyc ./smtplib.pyc ./pydoc.pyc ./aifc.pyc ./ssl.pyc ./inspect.pyc ./_strptime.pyc ./sre_compile.pyc ./_compression.pyc ./imp.pyc ./__future__.pyc ./optparse.pyc ./lzma.pyc ./codeop.pyc ./fnmatch.pyc ./operator.pyc ./chunk.pyc ./_weakrefset.pyc ./smtpd.pyc ./cgitb.pyc ./calendar.pyc ./argparse.pyc ./uu.pyc ./selectors.pyc ./decimal.pyc ./_threading_local.pyc ./difflib.pyc ./glob.pyc ./mailcap.pyc ./zipimport.pyc ./code.pyc ./copyreg.pyc ./io.pyc ./locale.pyc ./bz2.pyc ./types.pyc ./pty.pyc ./pipes.pyc ./platform.pyc ./asyncore.pyc ./gzip.pyc ./re/_casefix.pyc ./re/_compiler.pyc ./re/_constants.pyc ./re/_parser.pyc ./re/__init__.pyc ./ctypes/_endian.pyc ./ctypes/_aix.pyc ./ctypes/util.pyc ./ctypes/__init__.pyc ./ctypes/wintypes.pyc ./ctypes/macholib/framework.pyc ./ctypes/macholib/fetch_macholib.bat ./ctypes/macholib/dylib.pyc ./ctypes/macholib/dyld.pyc ./ctypes/macholib/fetch_macholib ./ctypes/macholib/__init__.pyc ./ctypes/macholib/README.ctypes ./collections/abc.pyc ./collections/__init__.pyc ./importlib/machinery.pyc ./importlib/_bootstrap.pyc ./importlib/_bootstrap_external.pyc ./importlib/abc.pyc ./importlib/_abc.pyc ./importlib/util.pyc ./importlib/simple.pyc ./importlib/readers.pyc ./importlib/__init__.pyc ./importlib/resources/abc.pyc ./importlib/resources/_common.pyc ./importlib/resources/_adapters.pyc ./importlib/resources/simple.pyc ./importlib/resources/_itertools.pyc ./importlib/resources/_legacy.pyc ./importlib/resources/readers.pyc ./importlib/resources/__init__.pyc ./importlib/metadata/_adapters.pyc ./importlib/metadata/_collections.pyc ./importlib/metadata/_itertools.pyc ./importlib/metadata/__init__.pyc ./importlib/metadata/_functools.pyc ./importlib/metadata/_text.pyc ./importlib/metadata/_meta.pyc ./turtledemo/yinyang.pyc ./turtledemo/turtle.cfg ./turtledemo/penrose.pyc ./turtledemo/nim.pyc ./turtledemo/tree.pyc ./turtledemo/fractalcurves.pyc ./turtledemo/planet_and_moon.pyc ./turtledemo/two_canvases.pyc ./turtledemo/chaos.pyc ./turtledemo/rosette.pyc ./turtledemo/paint.pyc ./turtledemo/colormixer.pyc ./turtledemo/bytedesign.pyc ./turtledemo/minimal_hanoi.pyc ./turtledemo/lindenmayer.pyc ./turtledemo/round_dance.pyc ./turtledemo/sorting_animate.pyc ./turtledemo/__main__.pyc ./turtledemo/peace.pyc ./turtledemo/clock.pyc ./turtledemo/__init__.pyc ./turtledemo/forest.pyc ./curses/has_key.pyc ./curses/ascii.pyc ./curses/panel.pyc ./curses/__init__.pyc ./curses/textpad.pyc ./venv/__main__.pyc ./venv/__init__.pyc ./venv/scripts/nt/activate.bat ./venv/scripts/nt/deactivate.bat ./venv/scripts/common/Activate.ps1 ./venv/scripts/common/activate ./venv/scripts/posix/activate.csh ./venv/scripts/posix/activate.fish ./dbm/gnu.pyc ./dbm/ndbm.pyc ./dbm/__init__.pyc ./dbm/dumb.pyc ./distutils/bcppcompiler.pyc ./distutils/version.pyc ./distutils/dir_util.pyc ./distutils/sysconfig.pyc ./distutils/fancy_getopt.pyc ./distutils/archive_util.pyc ./distutils/README ./distutils/msvccompiler.pyc ./distutils/debug.pyc ./distutils/file_util.pyc ./distutils/msvc9compiler.pyc ./distutils/filelist.pyc ./distutils/text_file.pyc ./distutils/unixccompiler.pyc ./distutils/dist.pyc ./distutils/cmd.pyc ./distutils/util.pyc ./distutils/core.pyc ./distutils/config.pyc ./distutils/ccompiler.pyc ./distutils/errors.pyc ./distutils/dep_util.pyc ./distutils/__init__.pyc ./distutils/log.pyc ./distutils/versionpredicate.pyc ./distutils/spawn.pyc ./distutils/cygwinccompiler.pyc ./distutils/_msvccompiler.pyc ./distutils/extension.pyc ./distutils/command/clean.pyc ./distutils/command/build_ext.pyc ./distutils/command/command_template ./distutils/command/build_scripts.pyc ./distutils/command/register.pyc ./distutils/command/check.pyc ./distutils/command/install.pyc ./distutils/command/sdist.pyc ./distutils/command/install_lib.pyc ./distutils/command/install_headers.pyc ./distutils/command/install_scripts.pyc ./distutils/command/build_clib.pyc ./distutils/command/config.pyc ./distutils/command/build.pyc ./distutils/command/install_egg_info.pyc ./distutils/command/bdist.pyc ./distutils/command/bdist_rpm.pyc ./distutils/command/build_py.pyc ./distutils/command/upload.pyc ./distutils/command/__init__.pyc ./distutils/command/bdist_dumb.pyc ./distutils/command/install_data.pyc ./tomllib/_types.pyc ./tomllib/_re.pyc ./tomllib/_parser.pyc ./tomllib/__init__.pyc ./encodings/bz2_codec.pyc ./encodings/uu_codec.pyc ./encodings/mbcs.pyc ./encodings/ptcp154.pyc ./encodings/cp852.pyc ./encodings/mac_iceland.pyc ./encodings/mac_romanian.pyc ./encodings/iso8859_9.pyc ./encodings/cp720.pyc ./encodings/cp1257.pyc ./encodings/shift_jisx0213.pyc ./encodings/koi8_t.pyc ./encodings/utf_7.pyc ./encodings/cp855.pyc ./encodings/cp1252.pyc ./encodings/koi8_r.pyc ./encodings/cp860.pyc ./encodings/rot_13.pyc ./encodings/cp1026.pyc ./encodings/iso8859_3.pyc ./encodings/cp1258.pyc ./encodings/mac_farsi.pyc ./encodings/iso8859_16.pyc ./encodings/mac_croatian.pyc ./encodings/hp_roman8.pyc ./encodings/utf_16_le.pyc ./encodings/cp500.pyc ./encodings/iso2022_jp_ext.pyc ./encodings/palmos.pyc ./encodings/cp1251.pyc ./encodings/iso8859_15.pyc ./encodings/iso8859_14.pyc ./encodings/cp858.pyc ./encodings/gb18030.pyc ./encodings/iso8859_6.pyc ./encodings/cp1006.pyc ./encodings/aliases.pyc ./encodings/mac_roman.pyc ./encodings/cp1254.pyc ./encodings/unicode_escape.pyc ./encodings/cp437.pyc ./encodings/cp866.pyc ./encodings/cp037.pyc ./encodings/charmap.pyc ./encodings/cp865.pyc ./encodings/iso8859_2.pyc ./encodings/undefined.pyc ./encodings/iso2022_jp_2.pyc ./encodings/oem.pyc ./encodings/iso8859_8.pyc ./encodings/punycode.pyc ./encodings/shift_jis.pyc ./encodings/cp932.pyc ./encodings/iso8859_11.pyc ./encodings/cp1140.pyc ./encodings/shift_jis_2004.pyc ./encodings/mac_latin2.pyc ./encodings/mac_cyrillic.pyc ./encodings/cp862.pyc ./encodings/cp1250.pyc ./encodings/iso2022_jp.pyc ./encodings/mac_turkish.pyc ./encodings/utf_32_le.pyc ./encodings/iso2022_jp_2004.pyc ./encodings/euc_kr.pyc ./encodings/big5hkscs.pyc ./encodings/iso8859_1.pyc ./encodings/base64_codec.pyc ./encodings/iso2022_kr.pyc ./encodings/euc_jisx0213.pyc ./encodings/cp273.pyc ./encodings/raw_unicode_escape.pyc ./encodings/cp775.pyc ./encodings/iso8859_10.pyc ./encodings/cp863.pyc ./encodings/mac_greek.pyc ./encodings/ascii.pyc ./encodings/cp1256.pyc ./encodings/cp874.pyc ./encodings/utf_32_be.pyc ./encodings/gb2312.pyc ./encodings/euc_jis_2004.pyc ./encodings/cp869.pyc ./encodings/cp875.pyc ./encodings/iso2022_jp_3.pyc ./encodings/cp1253.pyc ./encodings/cp864.pyc ./encodings/utf_32.pyc ./encodings/utf_16_be.pyc ./encodings/quopri_codec.pyc ./encodings/utf_8_sig.pyc ./encodings/cp424.pyc ./encodings/utf_16.pyc ./encodings/iso2022_jp_1.pyc ./encodings/iso8859_13.pyc ./encodings/iso8859_4.pyc ./encodings/kz1048.pyc ./encodings/iso8859_7.pyc ./encodings/__init__.pyc ./encodings/cp737.pyc ./encodings/cp949.pyc ./encodings/gbk.pyc ./encodings/cp861.pyc ./encodings/koi8_u.pyc ./encodings/iso8859_5.pyc ./encodings/cp850.pyc ./encodings/utf_8.pyc ./encodings/latin_1.pyc ./encodings/cp856.pyc ./encodings/tis_620.pyc ./encodings/mac_arabic.pyc ./encodings/cp857.pyc ./encodings/zlib_codec.pyc ./encodings/hex_codec.pyc ./encodings/euc_jp.pyc ./encodings/hz.pyc ./encodings/cp1125.pyc ./encodings/cp1255.pyc ./encodings/idna.pyc ./encodings/cp950.pyc ./encodings/johab.pyc ./encodings/big5.pyc ./xmlrpc/server.pyc ./xmlrpc/client.pyc ./xmlrpc/__init__.pyc ./msilib/schema.pyc ./msilib/sequence.pyc ./msilib/__init__.pyc ./msilib/text.pyc ./multiprocessing/context.pyc ./multiprocessing/synchronize.pyc ./multiprocessing/managers.pyc ./multiprocessing/popen_forkserver.pyc ./multiprocessing/reduction.pyc ./multiprocessing/sharedctypes.pyc ./multiprocessing/heap.pyc ./multiprocessing/resource_tracker.pyc ./multiprocessing/popen_fork.pyc ./multiprocessing/process.pyc ./multiprocessing/util.pyc ./multiprocessing/pool.pyc ./multiprocessing/queues.pyc ./multiprocessing/popen_spawn_win32.pyc ./multiprocessing/popen_spawn_posix.pyc ./multiprocessing/forkserver.pyc ./multiprocessing/connection.pyc ./multiprocessing/__init__.pyc ./multiprocessing/resource_sharer.pyc ./multiprocessing/shared_memory.pyc ./multiprocessing/spawn.pyc ./multiprocessing/dummy/connection.pyc ./multiprocessing/dummy/__init__.pyc ./site-packages/README.txt ./__phello__/spam.pyc ./__phello__/__init__.pyc ./__phello__/ham/eggs.pyc ./__phello__/ham/__init__.pyc ./logging/config.pyc ./logging/__init__.pyc ./logging/handlers.pyc ./zoneinfo/_tzpath.pyc ./zoneinfo/_common.pyc ./zoneinfo/__init__.pyc ./zoneinfo/_zoneinfo.pyc ./asyncio/locks.pyc ./asyncio/windows_events.pyc ./asyncio/events.pyc ./asyncio/runners.pyc ./asyncio/staggered.pyc ./asyncio/transports.pyc ./asyncio/subprocess.pyc ./asyncio/trsock.pyc ./asyncio/futures.pyc ./asyncio/selector_events.pyc ./asyncio/threads.pyc ./asyncio/exceptions.pyc ./asyncio/proactor_events.pyc ./asyncio/unix_events.pyc ./asyncio/protocols.pyc ./asyncio/base_subprocess.pyc ./asyncio/queues.pyc ./asyncio/base_tasks.pyc ./asyncio/timeouts.pyc ./asyncio/mixins.pyc ./asyncio/windows_utils.pyc ./asyncio/base_events.pyc ./asyncio/tasks.pyc ./asyncio/coroutines.pyc ./asyncio/__main__.pyc ./asyncio/format_helpers.pyc ./asyncio/taskgroups.pyc ./asyncio/__init__.pyc ./asyncio/log.pyc ./asyncio/base_futures.pyc ./asyncio/streams.pyc ./asyncio/sslproto.pyc ./asyncio/constants.pyc ./json/scanner.pyc ./json/tool.pyc ./json/encoder.pyc ./json/decoder.pyc ./json/__init__.pyc ./html/parser.pyc ./html/__init__.pyc ./html/entities.pyc ./wsgiref/simple_server.pyc ./wsgiref/util.pyc ./wsgiref/headers.pyc ./wsgiref/__init__.pyc ./wsgiref/handlers.pyc ./wsgiref/validate.pyc ./wsgiref/types.pyc ./sqlite3/dbapi2.pyc ./sqlite3/__init__.pyc ./sqlite3/dump.pyc ./unittest/case.pyc ./unittest/result.pyc ./unittest/_log.pyc ./unittest/signals.pyc ./unittest/main.pyc ./unittest/util.pyc ./unittest/async_case.pyc ./unittest/suite.pyc ./unittest/__main__.pyc ./unittest/runner.pyc ./unittest/loader.pyc ./unittest/__init__.pyc ./unittest/mock.pyc ./concurrent/__init__.pyc ./concurrent/futures/_base.pyc ./concurrent/futures/process.pyc ./concurrent/futures/thread.pyc ./concurrent/futures/__init__.pyc ./urllib/request.pyc ./urllib/error.pyc ./urllib/parse.pyc ./urllib/__init__.pyc ./urllib/robotparser.pyc ./urllib/response.pyc ./email/_parseaddr.pyc ./email/_header_value_parser.pyc ./email/parser.pyc ./email/quoprimime.pyc ./email/base64mime.pyc ./email/utils.pyc ./email/_policybase.pyc ./email/header.pyc ./email/message.pyc ./email/generator.pyc ./email/contentmanager.pyc ./email/architecture.rst ./email/_encoded_words.pyc ./email/policy.pyc ./email/errors.pyc ./email/encoders.pyc ./email/feedparser.pyc ./email/iterators.pyc ./email/charset.pyc ./email/headerregistry.pyc ./email/__init__.pyc ./email/mime/multipart.pyc ./email/mime/base.pyc ./email/mime/nonmultipart.pyc ./email/mime/message.pyc ./email/mime/audio.pyc ./email/mime/image.pyc ./email/mime/application.pyc ./email/mime/__init__.pyc ./email/mime/text.pyc ./xml/__init__.pyc ./xml/etree/ElementInclude.pyc ./xml/etree/ElementTree.pyc ./xml/etree/cElementTree.pyc ./xml/etree/__init__.pyc ./xml/etree/ElementPath.pyc ./xml/sax/xmlreader.pyc ./xml/sax/handler.pyc ./xml/sax/saxutils.pyc ./xml/sax/_exceptions.pyc ./xml/sax/expatreader.pyc ./xml/sax/__init__.pyc ./xml/dom/NodeFilter.pyc ./xml/dom/xmlbuilder.pyc ./xml/dom/minicompat.pyc ./xml/dom/domreg.pyc ./xml/dom/pulldom.pyc ./xml/dom/expatbuilder.pyc ./xml/dom/minidom.pyc ./xml/dom/__init__.pyc ./xml/parsers/expat.pyc ./xml/parsers/__init__.pyc ./pydoc_data/topics.pyc ./pydoc_data/_pydoc.css ./pydoc_data/__init__.pyc ./http/server.pyc ./http/client.pyc ./http/cookies.pyc ./http/cookiejar.pyc ./http/__init__.pyc
+4592:[DEBUG]:   Create directory /home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/dists/arise/_python_bundle__arm64-v8a/_python_bundle/site-packages/./urllib3-2.8.0.dist-info/licenses
+4619:[DEBUG]:   Create directory /home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/dists/arise/_python_bundle__arm64-v8a/_python_bundle/site-packages/./requests-2.34.2.dist-info/licenses
+4801:[DEBUG]:   Create directory /home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/dists/arise/_python_bundle__arm64-v8a/_python_bundle/site-packages/./chardet-7.7.0.dist-info/licenses
+5130:[DEBUG]:   Create directory /home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/dists/arise/_python_bundle__arm64-v8a/_python_bundle/site-packages/./idna-3.20.dist-info/licenses
+5139:[DEBUG]:   Create directory /home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/dists/arise/_python_bundle__arm64-v8a/_python_bundle/site-packages/./certifi-2026.10.23.dist-info/licenses
+5148:[DEBUG]:   Create directory /home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/dists/arise/_python_bundle__arm64-v8a/_python_bundle/site-packages/./pyaes-1.6.1.dist-info/licenses
+5547:[INFO]:    # Android package filename not found in build output. Guessing...
+=== LAST 90 LINES (unfiltered)
+[DEBUG]:   	...............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+[DEBUG]:   	Unzipping /home/runner/.gradle/wrapper/dists/gradle-8.0.2-all/14bt34ptcsg1ikmfn78tdh1keu/gradle-8.0.2-all.zip to /home/runner/.gradle/wrapper/dists/gradle-8.0.2-all/14bt34ptcsg1ikmfn78tdh1keu
+[DEBUG]:   	Set executable permissions for: /home/runner/.gradle/wrapper/dists/gradle-8.0.2-all/14bt34ptcsg1ikmfn78tdh1keu/gradle-8.0.2/bin/gradle
+[DEBUG]:   	
+[DEBUG]:   	Welcome to Gradle 8.0.2!
+[DEBUG]:   	
+[DEBUG]:   	Here are the highlights of this release:
+[DEBUG]:   	 - Improvements to the Kotlin DSL
+[DEBUG]:   	 - Fine-grained parallelism from the first build with configuration cache
+[DEBUG]:   	 - Configurable Gradle user home cache cleanup
+[DEBUG]:   	
+[DEBUG]:   	For more details see https://docs.gradle.org/8.0.2/release-notes.html
+[DEBUG]:   	
+[DEBUG]:   	Starting a Gradle Daemon (subsequent builds will be faster)
+[DEBUG]:   	> Task :clean UP-TO-DATE
+[DEBUG]:   	> Task :preBuild UP-TO-DATE
+[DEBUG]:   	> Task :preDebugBuild UP-TO-DATE
+[DEBUG]:   	> Task :mergeDebugNativeDebugMetadata NO-SOURCE
+[DEBUG]:   	> Task :javaPreCompileDebug
+[DEBUG]:   	> Task :checkDebugAarMetadata
+[DEBUG]:   	> Task :generateDebugResValues
+[DEBUG]:   	> Task :mapDebugSourceSetPaths
+[DEBUG]:   	> Task :generateDebugResources
+[DEBUG]:   	> Task :packageDebugResources
+[DEBUG]:   	> Task :mergeDebugResources
+[DEBUG]:   	> Task :createDebugCompatibleScreenManifests
+[DEBUG]:   	> Task :extractDeepLinksDebug
+[DEBUG]:   	> Task :parseDebugLocalResources
+[DEBUG]:   	
+[DEBUG]:   	> Task :processDebugMainManifest
+[DEBUG]:   	/home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/dists/arise/src/main/AndroidManifest.xml:71:18-50 Warning:
+[DEBUG]:   		android:extractNativeLibs should not be specified in this source AndroidManifest.xml file. See https://d.android.com/guide/topics/manifest/application-element#extractNativeLibs for more information.
+[DEBUG]:   	The AGP Upgrade Assistant can remove the attribute from the AndroidManifest.xml file and update the build file accordingly. See https://d.android.com/studio/build/agp-upgrade-assistant for more information.
+[DEBUG]:   	
+[DEBUG]:   	> Task :processDebugManifest
+[DEBUG]:   	> Task :mergeDebugShaders
+[DEBUG]:   	> Task :compileDebugShaders NO-SOURCE
+[DEBUG]:   	> Task :generateDebugAssets UP-TO-DATE
+[DEBUG]:   	> Task :mergeDebugAssets
+[DEBUG]:   	> Task :processDebugManifestForPackage
+[DEBUG]:   	> Task :compressDebugAssets
+[DEBUG]:   	> Task :processDebugJavaRes NO-SOURCE
+[DEBUG]:   	> Task :checkDebugDuplicateClasses
+[DEBUG]:   	> Task :desugarDebugFileDependencies
+[DEBUG]:   	> Task :mergeExtDexDebug
+[DEBUG]:   	> Task :mergeLibDexDebug
+[DEBUG]:   	> Task :mergeDebugJavaResource
+[DEBUG]:   	> Task :processDebugResources
+[DEBUG]:   	> Task :mergeDebugJniLibFolders
+[DEBUG]:   	
+[DEBUG]:   	> Task :compileDebugJavaWithJavac
+[DEBUG]:   	Note: Some input files use or override a deprecated API.
+[DEBUG]:   	Note: Recompile with -Xlint:deprecation for details.
+[DEBUG]:   	
+[DEBUG]:   	> Task :dexBuilderDebug
+[DEBUG]:   	> Task :mergeDebugNativeLibs
+[DEBUG]:   	> Task :mergeProjectDexDebug
+[DEBUG]:   	> Task :validateSigningDebug
+[DEBUG]:   	> Task :writeDebugAppMetadata
+[DEBUG]:   	> Task :writeDebugSigningConfigVersions
+[DEBUG]:   	> Task :stripDebugDebugSymbols
+[DEBUG]:   	> Task :packageDebug
+[DEBUG]:   	> Task :createDebugApkListingFileRedirect
+[DEBUG]:   	> Task :assembleDebug
+[DEBUG]:   	
+[DEBUG]:   	Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+[DEBUG]:   	
+[DEBUG]:   	You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+[DEBUG]:   	
+[DEBUG]:   	See https://docs.gradle.org/8.0.2/userguide/command_line_interface.html#sec:command_line_warnings
+[DEBUG]:   	
+[DEBUG]:   	BUILD SUCCESSFUL in 36s
+[DEBUG]:   	33 actionable tasks: 32 executed, 1 up-to-date
+[INFO]:    <- directory context /home/runner/p4a-src
+[DEBUG]:   All possible dists: [<Distribution: name arise with recipes (hostpython3, libffi, openssl, sdl2_image, sdl2_mixer, sdl2_ttf, sqlite3, python3, sdl2, setuptools, six, pyjnius, android, kivy, idna, pyaes, chardet, requests, certifi, urllib3, plyer)>]
+[DEBUG]:   Dist matching name and arch: [<Distribution: name arise with recipes (hostpython3, libffi, openssl, sdl2_image, sdl2_mixer, sdl2_ttf, sqlite3, python3, sdl2, setuptools, six, pyjnius, android, kivy, idna, pyaes, chardet, requests, certifi, urllib3, plyer)>]
+[DEBUG]:   Dist matching ndk_api and recipe: [<Distribution: name arise with recipes (hostpython3, libffi, openssl, sdl2_image, sdl2_mixer, sdl2_ttf, sqlite3, python3, sdl2, setuptools, six, pyjnius, android, kivy, idna, pyaes, chardet, requests, certifi, urllib3, plyer)>]
+[INFO]:    Of the existing distributions, the following meet the given requirements:
+[INFO]:    	arise: min API 24, includes recipes (hostpython3, libffi, openssl, sdl2_image, sdl2_mixer, sdl2_ttf, sqlite3, python3, sdl2, setuptools, six, pyjnius, android, kivy, idna, pyaes, chardet, requests, certifi, urllib3, plyer), built for archs (arm64-v8a)
+[INFO]:    arise has compatible recipes, using this one
+[INFO]:    # Copying android package to current directory
+[INFO]:    # Android package filename not found in build output. Guessing...
+[INFO]:    # Found android package file: /home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/dists/arise/build/outputs/apk/debug/arise-debug.apk
+[INFO]:    # Add version number to android package
+[INFO]:    # Android package renamed to arise-debug-0.2.0.apk
+stty: 'standard input': Inappropriate ioctl for device
+[DEBUG]:   -> running cp /home/runner/work/Arise/Arise/.buildozer/android/platform/build-arm64-v8a/dists/arise/build/outputs/apk/debug/arise-debug.apk arise-debug-0.2.0.apk
+# Android packaging done!
+# APK arise-0.2.0-arm64-v8a-debug.apk available in the bin directory
+buildozer exit code: 0
