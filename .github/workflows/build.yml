@@ -145,7 +145,7 @@ jobs:
           git push -f -q "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" build-logs
 
   exe:
-    needs: test
+    needs: [test, apk]
     runs-on: windows-latest
     continue-on-error: true      # best effort: a Windows failure never blocks the APK
     steps:
@@ -159,7 +159,7 @@ jobs:
           set +e
           {
             pip install "kivy[base]==2.3.0" "pyinstaller==6.6.0" "pyinstaller-hooks-contrib==2024.5" pyaes certifi plyer pillow
-            pyinstaller --noconfirm --onefile --windowed --name Arise --add-data "ui.kv;." --add-data "assets;assets" --hidden-import arise.adapters.android --hidden-import arise.adapters.desktop --hidden-import arise.adapters.ios --hidden-import plyer.platforms.win.notification --hidden-import plyer.platforms.win.tts main.py
+            pyinstaller --noconfirm --onefile --windowed --name Arise --add-data "ui.kv;." --add-data "assets;assets" --additional-hooks-dir hooks --hidden-import arise.adapters.android --hidden-import arise.adapters.desktop --hidden-import arise.adapters.ios --hidden-import plyer.platforms.win.notification --hidden-import plyer.platforms.win.tts main.py
           } > exe.log 2>&1
           code=$?
           tail -n 30 exe.log
@@ -171,3 +171,8 @@ jobs:
         with:
           name: arise-windows-exe
           path: dist/Arise.exe
+      - name: Attach exe to the GitHub Release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "apk-${{ github.run_number }}" dist/Arise.exe --clobber

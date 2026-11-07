@@ -4,7 +4,7 @@ package.name = arise
 package.domain = org.arise
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,json
-source.exclude_dirs = .github,bin,.buildozer,java,res,tests,docs
+source.exclude_dirs = .github,bin,.buildozer,java,res,tests,docs,hooks
 version = 0.2.0
 requirements = python3,kivy==2.3.0,pyjnius,android,plyer,openssl,certifi,pyaes
 orientation = portrait
