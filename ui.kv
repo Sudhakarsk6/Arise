@@ -412,6 +412,27 @@
                             group: 'auto'
                         Card:
                             Section:
+                                text: 'Example library'
+                            Muted:
+                                text: 'Ready-made scripts. Pick one and add it with one tap - no copy and paste.'
+                            Pick:
+                                id: ex_pick
+                                text: 'Loading...'
+                                on_text: app.ex_changed()
+                            Muted:
+                                id: ex_desc
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(50)
+                                spacing: dp(8)
+                                Btn:
+                                    text: 'Add this script'
+                                    on_release: app.ex_add()
+                                Ghost:
+                                    text: 'Show code'
+                                    on_release: app.ex_show()
+                        Card:
+                            Section:
                                 text: 'Import a Python script'
                             Muted:
                                 text: 'Nothing runs until it is validated, tested and approved by you.'

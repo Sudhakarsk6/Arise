@@ -31,9 +31,13 @@ def test_bad_script_cannot_be_approved(sc):
         sc.approve(r["id"], r["version_id"])
 
 
-def test_undeclared_permission_rejected(sc):
+def test_undeclared_permission_is_fixed_automatically(sc):
     r = sc.import_source("x.py", "def main():\n    arise.speak('hi')\n")
-    assert any("does not declare" in i for i in r["report"]["issues"])
+    assert r["report"]["ok"] and "added the missing permission" in r["text"]
+    assert sc.version(r["version_id"])["permissions"] == '["speak"]'
+    # an UNKNOWN permission is still rejected
+    r2 = sc.import_source("y.py", "# permissions: root\ndef main():\n    return 1\n")
+    assert not r2["report"]["ok"] and any("unknown permission" in i for i in r2["report"]["issues"])
 
 
 def test_failing_test_blocks_approval(sc):
@@ -93,3 +97,22 @@ def test_audit_trail(sc):
     r = sc.import_source("hello.py", GOOD); sc.approve(r["id"], r["version_id"]); sc.run(r["id"])
     ev = [a["event"] for a in sc.db.q("SELECT * FROM audit")]
     assert ev == ["script_import", "script_approve", "script_run"]
+
+
+def test_pasted_text_artifacts_are_cleaned(sc):
+    nb = "\u00a0"
+    messy = ("```python\r\n# name: Messy\r\n# description: pasted from a chat\r\n\r\ndef main():\r\n"
+             f"{nb}{nb}{nb}{nb}arise.open_url(\u201chttps://example.com\u201d)\r\n{nb}{nb}{nb}{nb}return \u2018ok\u2019\r\n```")
+    r = sc.import_source("messy.py", messy)
+    assert r["report"]["ok"], r["text"]
+    assert "[fixed]" in r["text"] and "open_url" in r["text"]          # fences/spaces/quotes + missing permission
+    assert sc.version(r["version_id"])["permissions"] == '["open_url"]'
+
+
+def test_example_library_loads_and_all_pass():
+    from arise import examples_lib
+    ex = examples_lib.load()
+    assert len(ex) >= 25 and all(e["label"] and e["source"] for e in ex)
+    sc = Scripts(DB(":memory:"), RecorderAdapter())
+    assert all(sc.import_source(e["file"], e["source"])["report"]["ok"] for e in ex)
+    assert any(e["hosts"] for e in ex)

@@ -24,7 +24,7 @@ from kivy.uix.widget import Widget
 HERE = os.path.dirname(os.path.abspath(__file__))
 resource_add_path(HERE)
 
-from arise import ai, android_api, automations, backup, finance, focus, quotes, tracking, voice
+from arise import ai, android_api, automations, backup, examples_lib, finance, focus, quotes, tracking, voice
 from arise import scripts as scripts_mod
 from arise.adapters import get_adapter
 from arise.db import DB
@@ -49,6 +49,45 @@ class LockScreen(Screen):
 
 class HomeScreen(Screen):
     pass
+
+
+class MainThreadAdapter:
+    """Android only allows speech, notifications and launching apps reliably from the UI thread, but scripts run
+    in a worker thread. This wrapper hands every call over to the UI thread and waits for the result."""
+
+    def __init__(self, inner):
+        self._inner = inner
+        self.name = inner.name
+
+    def _call(self, fn, *args):
+        if threading.current_thread() is threading.main_thread():
+            return fn(*args)
+        box, done = {}, threading.Event()
+
+        def run(dt):
+            try:
+                box["v"] = fn(*args)
+            except Exception as e:           # reported back to the script, never crashes the app
+                box["e"] = e
+            done.set()
+        Clock.schedule_once(run, 0)
+        if not done.wait(15):
+            raise TimeoutError("the phone did not respond - keep Arise open on screen while it runs")
+        if "e" in box:
+            raise box["e"]
+        return box["v"]
+
+    def notify(self, title, message):
+        return self._call(self._inner.notify, title, message)
+
+    def speak(self, text):
+        return self._call(self._inner.speak, text)
+
+    def open_url(self, url):
+        return self._call(self._inner.open_url, url)
+
+    def open_app(self, name):
+        return self._call(self._inner.open_app, name)
 
 
 def short(text, n=70):
@@ -120,7 +159,7 @@ class AriseApp(App):
         self.vault = Vault(os.path.join(self.store.base, "vault.json"))
 
     def _init_services(self):
-        self.adapter = get_adapter()
+        self.adapter = MainThreadAdapter(get_adapter())
         self.scripts = scripts_mod.Scripts(self.db, self.adapter, lambda: self.store.data.get("domains", []))
         android_api.request_permissions()
         focus.sync(self.store)
@@ -183,7 +222,7 @@ class AriseApp(App):
         for w in self.h.pages.current_screen.walk():          # keep each page's tab bar in sync
             if isinstance(w, Seg):
                 w.refresh(self.cur_sub.get(w.group))
-        {"home": self.refresh_home, "auto_scripts": self.refresh_scripts, "auto_rules": self.refresh_autos,
+        {"home": self.refresh_home, "auto_scripts": lambda: (self.refresh_examples(), self.refresh_scripts()), "auto_rules": self.refresh_autos,
          "auto_focus": self.refresh_focus, "auto_reply": self.refresh_access, "track_health": self.refresh_health,
          "track_habits": self.refresh_habits, "track_money": self.refresh_money, "fin_watch": self.refresh_watch,
          "fin_paper": self.refresh_paper, "settings": self.refresh_logs}.get(page, lambda: None)()
@@ -398,6 +437,35 @@ class AriseApp(App):
         if not box.children:
             box.add_widget(Factory.Muted(text="No scripts yet."))
 
+    def refresh_examples(self):
+        ids = self.h
+        if not hasattr(self, "_examples"):
+            self._examples = examples_lib.load()
+            ids.ex_pick.values = [e["label"] for e in self._examples]
+            ids.ex_pick.text = self._examples[0]["label"] if self._examples else "No examples found"
+        self.ex_changed()
+
+    def current_example(self):
+        return next((e for e in getattr(self, "_examples", []) if e["label"] == self.h.ex_pick.text), None)
+
+    def ex_changed(self):
+        e = self.current_example()
+        if not e:
+            self.h.ex_desc.text = ""
+            return
+        need = ("\nBefore running: Settings > Domains > add " + ", ".join(e["hosts"])) if e["hosts"] else ""
+        self.h.ex_desc.text = f"{e['description']}\nPermissions: {', '.join(e['permissions']) or 'none'}{need}"
+
+    def ex_add(self):
+        e = self.current_example()
+        if e:
+            self._import(e["file"], e["source"])
+
+    def ex_show(self):
+        e = self.current_example()
+        if e:
+            self.h.sc_code.text = e["source"]
+
     def sc_template(self):
         self.h.sc_code.text = scripts_mod.TEMPLATE
 
@@ -479,6 +547,7 @@ class AriseApp(App):
 
     def ed_new_version(self):
         res = self.scripts.new_version(self.cur_aid, self.h.ed_code.text)
+        self.h.ed_code.text = self.scripts.version(res["version_id"])["source"]      # show the cleaned text
         self.show_version(self.cur_aid, self.scripts.version(res["version_id"]))
         self.say(self.h.ed_msg, "Saved. Review the checks and changes, then approve." if res["report"]["ok"]
                  else "Saved, but the checks FAILED - it cannot be approved until they pass.", res["report"]["ok"])

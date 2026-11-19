@@ -26,12 +26,20 @@ def test_sum():
 '''
 
 
+class AnyDomain:
+    """Used only for dry-run tests: the network call is stubbed, so every domain is 'allowed'."""
+
+    def __contains__(self, item):
+        return True
+
+
 class ScriptAPI:
     """The only object a script can talk to. Every call checks the permissions you approved."""
 
     def __init__(self, adapter, granted, log, progress=None, kv=None, domains=(), http=get_text):
         self._adapter, self._granted, self._log = adapter, set(granted), log
-        self._progress, self._kv, self._domains, self._http = progress, kv, set(domains), http
+        self._progress, self._kv, self._http = progress, kv, http
+        self._domains = domains if isinstance(domains, AnyDomain) else set(domains)
 
     def _need(self, perm):
         if perm not in self._granted:
@@ -70,7 +78,10 @@ class ScriptAPI:
         m = re.match(r"https://([^/:]+)", str(url))
         if not m or m.group(1).lower() not in self._domains:
             raise PermissionError("domain is not on your allowed-domains list (Settings)")
-        return self._http(str(url))
+        try:
+            return self._http(str(url))
+        except Exception as e:
+            raise RuntimeError("network error (%s) - are you online?" % type(e).__name__)
 
     def storage_get(self, key, default=None):
         self._need("storage")
@@ -81,6 +92,56 @@ class ScriptAPI:
         if len(json.dumps(value, default=str)) > 10000:
             raise ValueError("stored value too large (10 KB max)")
         self._kv("set", str(key)[:60], value)
+
+
+_CLEAN = {"\u00a0": " ", "\u2007": " ", "\u202f": " ", "\u2009": " ", "\u200b": "", "\u200c": "", "\u200d": "",
+          "\ufeff": "", "\u00ad": "", "\u2018": "'", "\u2019": "'", "\u201c": '"', "\u201d": '"',
+          "\u2013": "-", "\u2014": "-"}
+
+
+def clean_source(source):
+    """Fix what phones/chats do to pasted code: ``` fences, non-breaking spaces, curly quotes, tabs, CRLF."""
+    notes, text = [], source.replace("\r\n", "\n").replace("\r", "\n")
+    m = re.match(r"^\s*```[a-zA-Z]*[ \t]*\n(.*?)\n?[ \t]*```\s*$", text, re.S)
+    if m:
+        text = m.group(1)
+        notes.append("removed ``` code fences")
+    n = sum(text.count(k) for k in _CLEAN)
+    for k, v in _CLEAN.items():
+        text = text.replace(k, v)
+    if n:
+        notes.append(f"replaced {n} invisible or curly character(s)")
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
+    if "\t" in text:
+        text = text.expandtabs(4)
+        notes.append("converted tabs to spaces")
+    return text.strip("\n") + "\n", notes
+
+
+def add_missing_permissions(source):
+    """If the script uses an API but forgot to declare it, add it to the '# permissions:' header."""
+    issues, used, tree = sandbox.check_policy(source)
+    if tree is None:
+        return source, []
+    declared = set(sandbox.parse_meta(source)["permissions"])
+    missing = sorted((used - declared) & sandbox.PERMISSIONS)
+    if not missing:
+        return source, []
+    line = "# permissions: " + ", ".join(sorted(declared | set(missing)))
+    lines = source.split("\n")
+    for i, l in enumerate(lines[:30]):
+        if re.match(r"\s*#\s*permissions\s*:", l, re.I):
+            lines[i] = line
+            break
+    else:
+        lines.insert(0, line)
+    return "\n".join(lines), [f"added the missing permission(s) to the header: {', '.join(missing)}"]
+
+
+def prepare(source):
+    text, notes = clean_source(source)
+    text, more = add_missing_permissions(text)
+    return text, notes + more
 
 
 def sha(source):
@@ -123,12 +184,12 @@ class Scripts:
     def _dry_api(self, perms):
         def factory():
             return ScriptAPI(RecorderAdapter(), perms, lambda m: None, kv=lambda *a: a[-1],
-                             domains=(), http=lambda u: "")
+                             domains=AnyDomain(), http=lambda u: "{}")
         return factory
 
     @staticmethod
     def format_report(rep):
-        lines = []
+        lines = ["[fixed] " + n for n in rep.get("notes", [])]
         for i in rep["issues"]:
             lines.append("[x] " + i)
         for t in rep["tests"]:
@@ -138,8 +199,10 @@ class Scripts:
 
     # ------------------------------------------------------------ lifecycle
     def import_source(self, filename, source):
+        source, notes = prepare(source)
         name = re.sub(r"\.py$", "", filename.replace("\\", "/").split("/")[-1]) or "script"
         rep = self.analyse(source, name)
+        rep["notes"] = notes
         m = rep["meta"]
         aid = self.db.x("INSERT INTO automations(title,description,category,icon,enabled,created_at) VALUES(?,?,?,?,0,?)",
                         (m["name"], m["description"], m["category"] if m["category"] in CATEGORIES else "General",
@@ -149,8 +212,10 @@ class Scripts:
         return {"id": aid, "version_id": vid, "report": rep, "text": self.format_report(rep)}
 
     def new_version(self, aid, source):
+        source, notes = prepare(source)
         a = self.get(aid)
         rep = self.analyse(source, a["title"])
+        rep["notes"] = notes
         vid = self._add_version(aid, source, rep)
         self.db.audit("script_version", f"{a['title']} ok={rep['ok']}")
         return {"version_id": vid, "report": rep, "text": self.format_report(rep), "diff": self.diff(aid, vid)}
