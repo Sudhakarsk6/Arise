@@ -18,6 +18,8 @@ DEFAULTS = {
     "currency": "INR",
     "risk": {"max_position_pct": 20},
     "logo_path": "",
+    "login_info": True,          # show location, weather and news on the login screen
+    "location": {"name": "", "lat": None, "lon": None},   # manual fallback (Settings)
     "automations": [],       # {"trigger": "voice|time", "value": str, "action": str, "param": str}
     "autoreply": {
         "enabled": False,
